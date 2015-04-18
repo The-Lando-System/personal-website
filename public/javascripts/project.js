@@ -1,34 +1,34 @@
-// Project list array
-var projectData = [];
-
 // DOM Ready =====================================================
 $(document).ready(function(){
 
-	// Populate the project table on page load
-	populateProjectTable();
+	// Populate the project information in the project page
+	populateProjectInfo();
 
 });
 
 // Functions =====================================================
 
-// Populate the list of projects
-function populateProjectTable() {
+// Populate the page with specific project information
+function populateProjectInfo() {
 
-	var projectTableContent = '';
-
-	//var projectURL = window.location.href;
-	//var idRe = /\/(\w+)\/project$/g;
+	// Get the project ID from the URL
 	var projectId = /\/(\w+)\/project$/g.exec(window.location.href)[1];
 
-	$.getJSON('/projects/' + projectId, function(data){
+	// Do a GET on the project/:id route
+	$.getJSON('/projects/' + projectId, function(project){
 
-		projectTableContent += '<tr id="' + data._id + '">';
-		projectTableContent += '<td>' + data.project + '</td>';
-		projectTableContent += '<td>' + data.description + '</td>';
-		projectTableContent += '<td>' + data._id + '</td>';
+		// Put the project name in the navbar and header
+		$('.page-header').html('<h1>' + project.project + '</h1>');
+		$('#projectTab a').html(project.project);
+
+		// Make a table with the project information
+		projectTableContent += '<tr id="' + project._id + '">';
+		projectTableContent += '<td>' + project.project + '</td>';
+		projectTableContent += '<td>' + project.description + '</td>';
+		projectTableContent += '<td>' + project._id + '</td>';
 		projectTableContent += '</tr>';
 
-		// Inject the content into the project table
+		// Inject the project content into the project table html
 		$('#projectList table tbody').html(projectTableContent);
 
 	});
