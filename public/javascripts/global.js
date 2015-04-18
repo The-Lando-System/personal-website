@@ -37,7 +37,7 @@ function populateProjectTable() {
 				projectTableContent += '<tr id="' + this._id + '">';
 				projectTableContent += '<td>' + this.project + '</td>';
 				projectTableContent += '<td>' + this.description + '</td>';
-				projectTableContent += '<td><a href="projects/' + this._id + '">Link to project</td>';
+				projectTableContent += '<td><a href="/' + this._id + '/project">Link to project</td>';
 				projectTableContent += '<td>';
 				projectTableContent += '<span id="editProject" style="cursor:pointer" class="glyphicon glyphicon-pencil" title="Edit" />';
 				projectTableContent += '<span id="deleteProject" style="cursor:pointer; padding-left:1em" class="glyphicon glyphicon-trash" title="Delete" />';

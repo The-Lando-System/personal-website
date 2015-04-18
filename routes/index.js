@@ -14,4 +14,15 @@ router.get('/', function(req, res) {
     res.sendfile(html_dir + 'index.html');
 });
 
+/*
+ * GET a single project
+ */
+router.get('/:id/project', function(req,res){
+	var db = req.db;
+	var projectToGet = req.params.id;
+	db.collection('projects').findById(projectToGet, function(err,item){
+		res.sendfile(html_dir + 'project.html');
+	});
+});
+
 module.exports = router;

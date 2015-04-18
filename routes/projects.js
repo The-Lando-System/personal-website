@@ -2,17 +2,6 @@ var express = require('express');
 var router = express.Router();
 
 /*
- * GET a single project
- */
-router.get('/:id', function(req,res){
-	var db = req.db;
-	var projectToGet = req.params.id;
-	db.collection('projects').findById(projectToGet, function(err,item){
-		res.json(item);
-	});
-});
-
-/*
  * GET the projects
  */
 router.get('/projects', function(req,res){
@@ -55,6 +44,17 @@ router.put('/updateproject/:id', function(req,res){
 		res.send(
 			(err === null) ? { msg: '' } : { msg: err }
 		);
+	});
+});
+
+/*
+ * GET a single project
+ */
+router.get('/:id', function(req,res){
+	var db = req.db;
+	var projectToGet = req.params.id;
+	db.collection('projects').findById(projectToGet, function(err,item){
+		res.json(item);
 	});
 });
 
