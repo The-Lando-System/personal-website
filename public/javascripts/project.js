@@ -22,6 +22,7 @@ function populateProjectInfo() {
 		$('#projectTab a').html(project.project);
 
 		// Make a table with the project information
+		var projectTableContent = '';
 		projectTableContent += '<tr id="' + project._id + '">';
 		projectTableContent += '<td>' + project.project + '</td>';
 		projectTableContent += '<td>' + project.description + '</td>';
