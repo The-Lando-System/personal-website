@@ -13,8 +13,8 @@
     "serve-favicon": "*",
     "debug": "~2.0.0",
     "jade": "*",
-    "mongodb": "*",
-    "mongoskin": "*"
+    "mongodb": "~1.4",
+    "mongoskin": "1.4.13"
   },
   "devDependencies": {
     "grunt": "*",
