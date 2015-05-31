@@ -4,12 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-// Database
 var mongo = require('mongoskin');
-//var db = mongo.db("mongodb://localhost:27017/personal-website", {native_parser:true});
-var db = mongo.db("mongodb://matt:cool@ds031942.mongolab.com:31942/heroku_app37348606", {native_parser:true});
-// mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]
 
 var routes = require('./routes/index');
 var projects = require('./routes/projects');
@@ -27,6 +22,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Set the DB based on environment
+var db;
+if (app.get('env') === 'production') {
+    db = mongo.db("mongodb://matt:cool@ds031942.mongolab.com:31942/heroku_app37348606", {native_parser:true});
+} else {
+    db = mongo.db("mongodb://localhost:27017/personal-website", {native_parser:true});
+}
+
 
 app.use(function(req,res,next){
     req.db = db;
