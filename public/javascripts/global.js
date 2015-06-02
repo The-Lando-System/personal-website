@@ -35,9 +35,8 @@ function populateProjectTable() {
 		if(data !== null){
 			$.each(data, function(){
 				projectTableContent += '<tr id="' + this._id + '">';
-				projectTableContent += '<td>' + this.project + '</td>';
+				projectTableContent += '<td><a href="/' + this._id + '/project">' + this.project + '</td>';
 				projectTableContent += '<td>' + this.description + '</td>';
-				projectTableContent += '<td><a href="/' + this._id + '/project">Link to project</td>';
 				projectTableContent += '<td>';
 				projectTableContent += '<span id="editProject" style="cursor:pointer" class="glyphicon glyphicon-pencil" title="Edit" />';
 				projectTableContent += '<span id="deleteProject" style="cursor:pointer; padding-left:1em" class="glyphicon glyphicon-trash" title="Delete" />';
@@ -50,7 +49,6 @@ function populateProjectTable() {
 		projectTableContent += '<tr id="newProjectInputs">';
 		projectTableContent += '<td><input type="text" id="newProjectInput" placeholder="Enter a name" /></td>';
 		projectTableContent += '<td><input type="text" id="newDescriptionInput" placeholder="Enter a description" /></td>';
-		projectTableContent += '<td><input type="text" id="newLink" placeholder="Enter the link address" /></td>';
 		projectTableContent += '<td><button id="btnAddProject" class="btn btn-xs btn-primary">Add</button></td>';
 		projectTableContent += '</tr>';
 
@@ -77,8 +75,7 @@ function addNewProject(event){
 		// Build the new project object from the inputs
 		var newProject = {
 			'project': $('#newProjectInputs input#newProjectInput').val(),
-			'description': $('#newProjectInputs input#newDescriptionInput').val(),
-			'link': $('#newProjectInputs input#newLink').val()
+			'description': $('#newProjectInputs input#newDescriptionInput').val()
 		};
 
 		// Use AJAX to post the project to the addproject service
@@ -150,7 +147,6 @@ function editProject(event){
 	var editProjectHtml = '';
 	editProjectHtml += '<td><input type="text" id="editProjectInput" value="' + projectToEdit.project + '"/></td>';
 	editProjectHtml += '<td><input type="text" id="editDescriptionInput" value="' + projectToEdit.description + '"/></td>';
-	editProjectHtml += '<td><input type="text" id="editTargetdateInput" value="' + projectToEdit.link + '"/></td>';
 	editProjectHtml += '<td>';
 	editProjectHtml += '<span id="confirmEditProject" style="cursor:pointer" class="glyphicon glyphicon-ok" title="Confirm Edit" />';
 	editProjectHtml += '</td>';
@@ -178,8 +174,7 @@ function updateProject(event){
 		// Extract the edited values from the project inputs
 		var editedProject = {
 			'project': $('#' + projectId + ' input#editProjectInput').val(),
-			'description': $('#' + projectId + ' input#editDescriptionInput').val(),
-			'link': $('#' + projectId + ' input#editTargetdateInput').val()
+			'description': $('#' + projectId + ' input#editDescriptionInput').val()
 		};
 
 		// Use AJAX to put the edited project to the updateproject service

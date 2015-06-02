@@ -14,6 +14,11 @@ router.get('/', function(req, res) {
     res.sendfile(html_dir + 'index.html');
 });
 
+// routes to serve the static HTML files
+router.get('/sound-project', function(req, res) {
+    res.sendfile(html_dir + 'sound-project.html');
+});
+
 /*
  * GET a single project
  */
