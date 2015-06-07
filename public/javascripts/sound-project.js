@@ -4,7 +4,9 @@ $(document).ready(function(){
 	// Populate the sound data
 	populateSoundDataTable();
 
-	listenForSoundData();
+	listenForSoundData(false);
+
+	$('#autoRefresh').on('change',toggleAutoRefresh);
 
 });
 
@@ -33,7 +35,7 @@ function populateSoundDataTable() {
 
 }
 
-function listenForSoundData() {
+function listenForSoundData(isEnabled) {
 
 	var graph;
 
@@ -61,27 +63,39 @@ function listenForSoundData() {
 
 	});
 
+	if (isEnabled){
 
-	window.intervalId = setInterval(function() {
-		// graph.updateOptions( { 'file': graphData } );
+		window.intervalId = setInterval(function() {
+			// graph.updateOptions( { 'file': graphData } );
 
-		$.getJSON('/sound-data/sound-data', function(data){
+			$.getJSON('/sound-data/sound-data', function(data){
 
-			var soundData = data;
-			var graphData = '';
+				var soundData = data;
+				var graphData = '';
 
-			if(soundData !== null){
-				$.each(soundData, function(){
-					graphData += this.timestamp + ',' + this.frequency + '\n';
-				});
-			}
+				if(soundData !== null){
+					$.each(soundData, function(){
+						graphData += this.timestamp + ',' + this.frequency + '\n';
+					});
+				}
 
-			graph.updateOptions( { 'file': graphData } );
+				graph.updateOptions( { 'file': graphData } );
 
-		});
+			});
 
-		populateSoundDataTable();
+			populateSoundDataTable();
 
-	}, 2000);
+		}, 2000);
+	} else {
+		clearInterval(window.intervalId);
+	}
 
+}
+
+function toggleAutoRefresh() {
+	if (document.getElementById('autoRefreshCheckbox').checked) {
+		listenForSoundData(true);
+	} else {
+		listenForSoundData(false);
+	}
 }
