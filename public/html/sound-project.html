@@ -50,11 +50,25 @@
     <div class="page-header">
       <h1>Sound Project</h1>
     </div>
-    <div id="graphdiv" style="float: left;"></div>
-    <div id="autoRefresh" style="float: left;">
-      <label>
-        <input id="autoRefreshCheckbox" type="checkbox"> Auto-Refresh
-      </label>
+    <div id="graphDiv" style="float: left;"></div>
+    <div id="controlDiv" style="float: left; padding-left: 50px;">
+      <div>
+        <label>
+          <input id="autoRefreshCheckbox" type="checkbox"> Auto-Refresh
+        </label>
+      </div>
+      <div style="padding-top: 15px;">
+        <h4>Refresh Interval:</h4>
+      </div>
+      <div>
+        <label><input type="radio" name="refreshInterval" checked="checked">1 second</label>
+      </div>
+      <div>
+        <label><input type="radio" name="refreshInterval">100 milliseconds</label>
+      </div>
+      <div style="padding-top: 75px;">
+        <button id="deleteSoundDataBtn" class="btn btn-warning">Reset Data</button>
+      </div>
     </div>
     <br style="clear: both;" />
     <div id="soundDataTable" class="row">

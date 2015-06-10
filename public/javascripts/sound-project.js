@@ -6,7 +6,9 @@ $(document).ready(function(){
 
 	listenForSoundData(false);
 
-	$('#autoRefresh').on('change',toggleAutoRefresh);
+	$('#autoRefreshCheckbox').on('change', toggleAutoRefresh);
+
+	$('#deleteSoundDataBtn').on('click', deleteSoundData);
 
 });
 
@@ -50,9 +52,7 @@ function listenForSoundData(isEnabled) {
 			});
 		}
 
-
-		//graph = new Dygraph(document.getElementById("graphdiv"), graphData);
-		graph = new Dygraph(document.getElementById("graphdiv"), graphData,
+		graph = new Dygraph(document.getElementById("graphDiv"), graphData,
 			{
 				drawPoints: true,
 				showRoller: true,
@@ -97,5 +97,24 @@ function toggleAutoRefresh() {
 		listenForSoundData(true);
 	} else {
 		listenForSoundData(false);
+	}
+}
+
+function deleteSoundData() {
+	event.preventDefault();
+
+	// Confirm the delete with a dialog
+	var confirmation = confirm('Are you sure you want to reset the data?');
+	if (confirmation === true){
+
+		$.ajax({
+			type: 'DELETE',
+			url: '/sound-data/delete-sound-data'
+		}).done(function( response ) {
+			populateSoundDataTable();
+		});
+
+	} else {
+		return false;
 	}
 }

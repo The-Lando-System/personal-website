@@ -26,10 +26,9 @@ router.post('/add-sound-data', function(req,res){
 /*
  * DELETE to delete-sound-data
  */
-router.delete('/delete-sound-data/:id', function(req,res){
+router.delete('/delete-sound-data', function(req,res){
 	var db = req.db;
-	var projectToDelete = req.params.id;
-	db.collection('sound-data').removeById(projectToDelete, function(err, result) {
+	db.collection('sound-data').remove(function(err, result) {
 		res.send((result === 1) ? { msg: '' } : { msg:'error: ' + err });
 	});
 });
