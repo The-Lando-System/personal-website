@@ -4,7 +4,11 @@ import json
 import requests
 import argparse
 import sys
-from time import strftime
+import datetime
+
+collectFreq = 0.01	# in seconds
+postFreq = 0.01		# in seconds, cannot be greater than collect
+postFreq = postFreq / collectFreq
 
 parser = argparse.ArgumentParser(description='Provide ops for the environment')
 parser.add_argument('--ops', action='store_true', default=False, dest='ops')
@@ -17,7 +21,7 @@ def postToWebsite( data ):
 	print(data)
 	postData = {
 		"frequency": data,
-		"timestamp": strftime("%Y-%m-%dT%H:%M:%S")
+		"timestamp": datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%f")
 	}
 	postData = json.dumps(postData)
 	url = 'http://localhost:3000/sound-data/add-sound-data'
@@ -51,9 +55,9 @@ while True:
 		dataArray.append(int(data))
 	else:
 		dataArray.append(0)
-	time.sleep(0.01)
+	time.sleep(collectFreq)
 	count+=1
-	if count == 100:
+	if count > postFreq:
 		postProcess(dataArray)
 		count = 0
 		dataArray = []

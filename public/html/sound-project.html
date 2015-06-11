@@ -61,16 +61,16 @@
         <h4>Refresh Interval:</h4>
       </div>
       <div>
-        <label><input type="radio" name="refreshInterval" checked="checked">1 second</label>
+        <label><input id="oneSecInt" type="radio" name="refreshInterval" checked="checked" value="1000">1 second</label>
       </div>
       <div>
-        <label><input type="radio" name="refreshInterval">100 milliseconds</label>
-      </div>
-      <div style="padding-top: 75px;">
-        <button id="deleteSoundDataBtn" class="btn btn-warning">Reset Data</button>
+        <label><input id="oneHundredMilliInt" type="radio" name="refreshInterval" value="100">100 milliseconds</label>
       </div>
     </div>
     <br style="clear: both;" />
+    <div style="padding-top: 20px; padding-bottom: 20px; padding-left: 50px;">
+      <button id="deleteSoundDataBtn" class="btn btn-warning">Reset Data</button>
+    </div>
     <div id="soundDataTable" class="row">
       <table class="table table-striped">
         <thead>

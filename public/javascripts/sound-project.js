@@ -4,11 +4,13 @@ $(document).ready(function(){
 	// Populate the sound data
 	populateSoundDataTable();
 
-	listenForSoundData(false);
+	listenForSoundData(false,$('input[type=radio][name=refreshInterval]:checked').val());
 
 	$('#autoRefreshCheckbox').on('change', toggleAutoRefresh);
 
 	$('#deleteSoundDataBtn').on('click', deleteSoundData);
+
+	$('input[type=radio][name=refreshInterval]').change(changeRefreshInterval);
 
 });
 
@@ -37,7 +39,7 @@ function populateSoundDataTable() {
 
 }
 
-function listenForSoundData(isEnabled) {
+function listenForSoundData(isEnabled,refreshInterval) {
 
 	var graph;
 
@@ -64,7 +66,6 @@ function listenForSoundData(isEnabled) {
 	});
 
 	if (isEnabled){
-
 		window.intervalId = setInterval(function() {
 			// graph.updateOptions( { 'file': graphData } );
 
@@ -85,7 +86,7 @@ function listenForSoundData(isEnabled) {
 
 			populateSoundDataTable();
 
-		}, 2000);
+		}, refreshInterval);
 	} else {
 		clearInterval(window.intervalId);
 	}
@@ -93,10 +94,13 @@ function listenForSoundData(isEnabled) {
 }
 
 function toggleAutoRefresh() {
+
+	var refreshInterval = $('input[type=radio][name=refreshInterval]:checked').val();
+
 	if (document.getElementById('autoRefreshCheckbox').checked) {
-		listenForSoundData(true);
+		listenForSoundData(true,refreshInterval);
 	} else {
-		listenForSoundData(false);
+		listenForSoundData(false,refreshInterval);
 	}
 }
 
@@ -117,4 +121,17 @@ function deleteSoundData() {
 	} else {
 		return false;
 	}
+}
+
+function changeRefreshInterval() {
+
+	var refreshInterval = this.value;
+	//alert(refreshInterval);
+	clearInterval(window.intervalId);
+	listenForSoundData(document.getElementById('autoRefreshCheckbox').checked,refreshInterval);
+	//if (document.getElementById('autoRefreshCheckbox').checked) {
+	//	listenForSoundData(true);
+	//} else {
+	//	listenForSoundData(false);
+	//}
 }
