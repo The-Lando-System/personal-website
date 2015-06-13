@@ -2,8 +2,6 @@ var myApp = angular.module('myApp',[]);
 
 myApp.controller('SoundInfoController', ['$scope', function($scope) {
 
-	$scope.greeting = 'Hello Angular!';
-
 	/* 
 	 * Delete the sound data
 	 */
@@ -34,6 +32,24 @@ myApp.controller('SoundInfoController', ['$scope', function($scope) {
 		clearInterval(window.intervalId);
 		listenForSoundData($scope.refreshCheckboxValue,$scope.refreshIntervalValue);
 	}
+
+	/*
+	 * Toggle Raw Sound Data Table
+	 */
+	$scope.showSoundTable = false;
+	$scope.soundTableButtonText = "Show Raw Data";
+	$
+	$scope.toggleSoundDataTable = function () {
+		if ($scope.showSoundTable){
+			$scope.showSoundTable = false;
+			$scope.soundTableButtonText = "Show Raw Data";
+		} else {
+			$scope.showSoundTable = true;
+			$scope.soundTableButtonText = "Hide Raw Data";
+		}
+		
+	}
+
 
 	/*
 	 * Populate the sound data table
@@ -81,6 +97,7 @@ myApp.controller('SoundInfoController', ['$scope', function($scope) {
 				{
 					drawPoints: true,
 					showRoller: true,
+					rollPeriod: 2,
 					valueRange: [0,100],
 					labels: ['Timestamp', 'Frequency']
 				}
