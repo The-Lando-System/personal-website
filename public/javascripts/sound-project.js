@@ -1,137 +1,122 @@
-// DOM Ready =====================================================
-$(document).ready(function(){
+var myApp = angular.module('myApp',[]);
 
-	// Populate the sound data
-	populateSoundDataTable();
+myApp.controller('SoundInfoController', ['$scope', function($scope) {
 
-	listenForSoundData(false,$('input[type=radio][name=refreshInterval]:checked').val());
+	$scope.greeting = 'Hello Angular!';
 
-	$('#autoRefreshCheckbox').on('change', toggleAutoRefresh);
+	/* 
+	 * Delete the sound data
+	 */
+	$scope.deleteSoundData = function() {
 
-	$('#deleteSoundDataBtn').on('click', deleteSoundData);
+		// Confirm the delete with a dialog
+		var confirmation = confirm('Are you sure you want to reset the data?');
+		if (confirmation === true){
 
-	$('input[type=radio][name=refreshInterval]').change(changeRefreshInterval);
-
-});
-
-// Populate the list of sound data
-function populateSoundDataTable() {
-
-	var soundDataTableContent = '';
-
-	$.getJSON('/sound-data/sound-data', function(data){
-
-		var soundData = data;
-		if(soundData !== null){
-			$.each(soundData, function(){
-				soundDataTableContent += '<tr id="' + this._id + '">';
-				soundDataTableContent += '<td>' + this.frequency + '</td>';
-				soundDataTableContent += '<td>' + this.timestamp + '</td>';
-				soundDataTableContent += '</tr>';
+			$.ajax({
+				type: 'DELETE',
+				url: '/sound-data/delete-sound-data'
+			}).done(function( response ) {
+				populateSoundDataTable();
 			});
+
+		} else {
+			return false;
 		}
+	};
 
-		// Inject the content into the sound data table
-		$('#soundDataTable table tbody').html(soundDataTableContent);
-
-	});
-
-
-}
-
-function listenForSoundData(isEnabled,refreshInterval) {
-
-	var graph;
-
-	$.getJSON('/sound-data/sound-data', function(data){
-
-		var soundData = data;
-		var graphData = '';
-
-		if(soundData !== null){
-			$.each(soundData, function(){
-				graphData += this.timestamp + ',' + this.frequency + '\n';
-			});
-		}
-
-		graph = new Dygraph(document.getElementById("graphDiv"), graphData,
-			{
-				drawPoints: true,
-				showRoller: true,
-				valueRange: [0,100],
-				labels: ['Timestamp', 'Frequency']
-			}
-		);
-
-	});
-
-	if (isEnabled){
-		window.intervalId = setInterval(function() {
-			// graph.updateOptions( { 'file': graphData } );
-
-			$.getJSON('/sound-data/sound-data', function(data){
-
-				var soundData = data;
-				var graphData = '';
-
-				if(soundData !== null){
-					$.each(soundData, function(){
-						graphData += this.timestamp + ',' + this.frequency + '\n';
-					});
-				}
-
-				graph.updateOptions( { 'file': graphData } );
-
-			});
-
-			populateSoundDataTable();
-
-		}, refreshInterval);
-	} else {
+	/*
+	 * Toggle Graph Controls
+	 */
+	$scope.refreshCheckboxValue = false;	// Auto-refresh enable initial setting
+	$scope.refreshIntervalValue = 1000;		// Refresh interval initial setting 
+	$scope.toggleGraphControls = function () {
 		clearInterval(window.intervalId);
+		listenForSoundData($scope.refreshCheckboxValue,$scope.refreshIntervalValue);
 	}
 
-}
+	/*
+	 * Populate the sound data table
+	 * TO-DO : use ng-repeat
+	 */
+	var populateSoundDataTable = function() {
+		var soundDataTableContent = '';
 
-function toggleAutoRefresh() {
+		$.getJSON('/sound-data/sound-data', function(data){
 
-	var refreshInterval = $('input[type=radio][name=refreshInterval]:checked').val();
+			var soundData = data;
+			if(soundData !== null){
+				$.each(soundData, function(){
+					soundDataTableContent += '<tr id="' + this._id + '">';
+					soundDataTableContent += '<td>' + this.frequency + '</td>';
+					soundDataTableContent += '<td>' + this.timestamp + '</td>';
+					soundDataTableContent += '</tr>';
+				});
+			}
 
-	if (document.getElementById('autoRefreshCheckbox').checked) {
-		listenForSoundData(true,refreshInterval);
-	} else {
-		listenForSoundData(false,refreshInterval);
-	}
-}
+			// Inject the content into the sound data table
+			$('#soundDataTable table tbody').html(soundDataTableContent);
+		});
+	};
 
-function deleteSoundData() {
-	event.preventDefault();
+	/*
+	 * Create the sound graph and get sound data at the given interval
+	 * TO-DO : find a better way...
+	 */
+	var listenForSoundData = function(isEnabled,refreshInterval) {
+		var graph;
 
-	// Confirm the delete with a dialog
-	var confirmation = confirm('Are you sure you want to reset the data?');
-	if (confirmation === true){
+		$.getJSON('/sound-data/sound-data', function(data){
 
-		$.ajax({
-			type: 'DELETE',
-			url: '/sound-data/delete-sound-data'
-		}).done(function( response ) {
-			populateSoundDataTable();
+			var soundData = data;
+			var graphData = '';
+
+			if(soundData !== null){
+				$.each(soundData, function(){
+					graphData += this.timestamp + ',' + this.frequency + '\n';
+				});
+			}
+
+			graph = new Dygraph(document.getElementById("graphDiv"), graphData,
+				{
+					drawPoints: true,
+					showRoller: true,
+					valueRange: [0,100],
+					labels: ['Timestamp', 'Frequency']
+				}
+			);
+
 		});
 
-	} else {
-		return false;
-	}
-}
+		if (isEnabled){
+			window.intervalId = setInterval(function() {
+				// graph.updateOptions( { 'file': graphData } );
 
-function changeRefreshInterval() {
+				$.getJSON('/sound-data/sound-data', function(data){
 
-	var refreshInterval = this.value;
-	//alert(refreshInterval);
-	clearInterval(window.intervalId);
-	listenForSoundData(document.getElementById('autoRefreshCheckbox').checked,refreshInterval);
-	//if (document.getElementById('autoRefreshCheckbox').checked) {
-	//	listenForSoundData(true);
-	//} else {
-	//	listenForSoundData(false);
-	//}
-}
+					var soundData = data;
+					var graphData = '';
+
+					if(soundData !== null){
+						$.each(soundData, function(){
+							graphData += this.timestamp + ',' + this.frequency + '\n';
+						});
+					}
+
+					graph.updateOptions( { 'file': graphData } );
+
+				});
+
+				populateSoundDataTable();
+
+			}, refreshInterval);
+		} else {
+			clearInterval(window.intervalId);
+		}
+	};
+
+	// Execute these functions on page load
+	populateSoundDataTable();
+	listenForSoundData($scope.refreshCheckboxValue,$scope.refreshIntervalValue);
+
+}]);

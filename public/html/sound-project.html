@@ -18,7 +18,7 @@
 
   </head>
 
-  <body role="document">
+  <body role="document" ng-app="myApp" ng-controller="SoundInfoController">
 
     <!-- Fixed navbar -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -45,32 +45,46 @@
         </div>
       </div>
     </nav>
-    <!-- Project Name goes here -->
     <br/>
+
+    <!-- Header -->
     <div class="page-header">
       <h1>Sound Project</h1>
     </div>
+
+    <!-- Sound Graph -->
     <div id="graphDiv" style="float: left;"></div>
+
+    <!-- Graph Controls -->
     <div id="controlDiv" style="float: left; padding-left: 50px;">
       <div>
         <label>
-          <input id="autoRefreshCheckbox" type="checkbox"> Auto-Refresh
+          <input id="autoRefreshCheckbox" type="checkbox" ng-model="refreshCheckboxValue" ng-change="toggleGraphControls()"> Auto-Refresh
         </label>
       </div>
       <div style="padding-top: 15px;">
         <h4>Refresh Interval:</h4>
       </div>
       <div>
-        <label><input id="oneSecInt" type="radio" name="refreshInterval" checked="checked" value="1000">1 second</label>
+        <label><input id="oneSecInt" type="radio" name="refreshInterval" ng-model="refreshIntervalValue" ng-change="toggleGraphControls()" checked="checked" value="1000">1 second</label>
       </div>
       <div>
-        <label><input id="oneHundredMilliInt" type="radio" name="refreshInterval" value="100">100 milliseconds</label>
+        <label><input id="oneHundredMilliInt" type="radio" name="refreshInterval" ng-model="refreshIntervalValue" ng-change="toggleGraphControls()" value="100">100 milliseconds</label>
       </div>
     </div>
+
+    <!-- Sound Project Info -->
+    <div id="infoDiv" style="float: left; padding-left: 50px;">
+      {{ greeting }}
+    </div>
+
+    <!-- Reset Sound Data -->
     <br style="clear: both;" />
     <div style="padding-top: 20px; padding-bottom: 20px; padding-left: 50px;">
-      <button id="deleteSoundDataBtn" class="btn btn-warning">Reset Data</button>
+      <button id="deleteSoundDataBtn" ng-click="deleteSoundData()" class="btn btn-warning">Reset Data</button>
     </div>
+
+    <!-- Sound Data Table -->
     <div id="soundDataTable" class="row">
       <table class="table table-striped">
         <thead>
@@ -79,7 +93,7 @@
             <th>Timestamp</th>
           </tr>
         </thead>
-        <!-- This will be populated by projects from the DB -->
+        <!-- This will be populated in the sound project controller -->
         <tbody>
         </tbody>
       </table>
@@ -87,6 +101,7 @@
 
     <!-- Bootstrap core JavaScript -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
     <script src="/javascripts/jquery-2.1.1.min.js"></script>
     <script src="/javascripts/bootstrap.min.js"></script>
     <script src="/javascripts/sound-project.js"></script>
