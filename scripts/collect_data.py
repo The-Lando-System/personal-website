@@ -6,7 +6,7 @@ import argparse
 import sys
 import datetime
 
-collectFreq = 0.01	# in seconds
+collectFreq = 0.001	# in seconds
 postFreq = 0.01		# in seconds, cannot be greater than collect
 postFreq = postFreq / collectFreq
 
