@@ -11,6 +11,12 @@ var html_dir = './public/html/';
 
 // routes to serve the static HTML files
 router.get('/', function(req, res) {
+    //res.sendfile(html_dir + 'index.html');
+    res.sendfile(html_dir + 'layout.html');
+});
+
+router.get('/index', function(req, res) {
+    //res.sendfile(html_dir + 'index.html');
     res.sendfile(html_dir + 'index.html');
 });
 
