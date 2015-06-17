@@ -9,15 +9,19 @@ var router = express.Router();
 // a convenient variable to refer to the HTML directory
 var html_dir = './public/html/';
 
-// routes to serve the static HTML files
 router.get('/', function(req, res) {
     //res.sendfile(html_dir + 'index.html');
-    res.sendfile(html_dir + 'layout.html');
+    res.sendfile(html_dir + 'index.html');
 });
 
-router.get('/index', function(req, res) {
+router.get('/nav-bar', function(req, res) {
     //res.sendfile(html_dir + 'index.html');
-    res.sendfile(html_dir + 'index.html');
+    res.sendfile(html_dir + 'nav-bar.html');
+});
+
+router.get('/header', function(req, res) {
+    //res.sendfile(html_dir + 'index.html');
+    res.sendfile(html_dir + 'header.html');
 });
 
 // routes to serve the static HTML files

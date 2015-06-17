@@ -8,16 +8,16 @@ $(document).ready(function(){
 	populateProjectTable();
 
 	// Add new project button click
-	$('#projectList').on('click', 'button', addNewProject);
+	$(document).on('click', '#btnAddProject', addNewProject);
 
 	// Delete a project button click
-	$('#projectList').on('click', 'td span#deleteProject', deleteProject);
+	$(document).on('click', 'td span#deleteProject', deleteProject);
 
 	// Edit a project button click
-	$('#projectList').on('click', 'td span#editProject', editProject);
+	$(document).on('click', 'td span#editProject', editProject);
 
 	// Update a project confirmation click
-	$('#projectList').on('click', 'td span#confirmEditProject', updateProject);
+	$(document).on('click', 'td span#confirmEditProject', updateProject);
 
 });
 
