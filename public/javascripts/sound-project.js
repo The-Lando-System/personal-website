@@ -16,6 +16,7 @@ myApp.controller('SoundInfoController', ['$scope', function($scope) {
 				url: '/sound-data/delete-sound-data'
 			}).done(function( response ) {
 				populateSoundDataTable();
+				listenForSoundData($scope.refreshCheckboxValue,$scope.refreshIntervalValue);
 			});
 
 		} else {
@@ -63,11 +64,35 @@ myApp.controller('SoundInfoController', ['$scope', function($scope) {
 				data = $.csv2Array(csvd);
 			},
 			dataType: "text",
-			complete: function () {
-				// call a function on complete
-			}
+			complete: function () {}
 		});
-		alert(data);
+		$.each(data, function(){ 
+
+			
+			//alert(this[0] + ' : ' + this[1]);
+			var frequency = this[0];
+			var timestamp = this[1];
+
+			var soundData = {
+				'frequency': frequency,
+				'timestamp': timestamp
+			};
+
+			$.ajax({
+				type: 'POST',
+				data: soundData,
+				url: '/sound-data/add-sound-data',
+				dataType: 'JSON'
+			}).done(function(response){
+				if (response.msg === ''){
+					populateSoundDataTable();
+					listenForSoundData($scope.refreshCheckboxValue,$scope.refreshIntervalValue);
+				} else {
+					alert('Error: ' + response.msg);
+				}
+			});
+
+		});
 	}
 
 
@@ -109,19 +134,32 @@ myApp.controller('SoundInfoController', ['$scope', function($scope) {
 
 			if(soundData !== null){
 				$.each(soundData, function(){
-					graphData += this.timestamp + ',' + this.frequency + '\n';
+					if (this.timestamp && this.frequency) {
+						graphData += this.timestamp + ',' + this.frequency + '\n';
+					}
 				});
+			} else {
+				return;
 			}
 
-			graph = new Dygraph(document.getElementById("graphDiv"), graphData,
-				{
-					drawPoints: true,
-					showRoller: true,
-					rollPeriod: 2,
-					valueRange: [0,100],
-					labels: ['Timestamp', 'Frequency']
-				}
-			);
+			// if (graphData === ''){
+			// 	return;
+			// }
+
+			if (graphData === '') {
+				graph = new Dygraph(document.getElementById("graphDiv"), "X\n", {});
+			} else {
+				graph = new Dygraph(document.getElementById("graphDiv"), graphData,
+					{
+						drawPoints: true,
+						showRoller: true,
+						rollPeriod: 2,
+						valueRange: [0,100],
+						labels: ['Timestamp', 'Frequency']
+					}
+				);
+			}
+			
 
 		});
 
@@ -138,6 +176,8 @@ myApp.controller('SoundInfoController', ['$scope', function($scope) {
 						$.each(soundData, function(){
 							graphData += this.timestamp + ',' + this.frequency + '\n';
 						});
+					} else {
+						return;
 					}
 
 					graph.updateOptions( { 'file': graphData } );
