@@ -38,7 +38,6 @@ myApp.controller('SoundInfoController', ['$scope', function($scope) {
 	 */
 	$scope.showSoundTable = false;
 	$scope.soundTableButtonText = "Show Raw Data";
-	$
 	$scope.toggleSoundDataTable = function () {
 		if ($scope.showSoundTable){
 			$scope.showSoundTable = false;
@@ -48,6 +47,27 @@ myApp.controller('SoundInfoController', ['$scope', function($scope) {
 			$scope.soundTableButtonText = "Hide Raw Data";
 		}
 		
+	}
+
+
+	/*
+	 * Load the sample CSV sound data
+	 */
+	$scope.loadCSVData = function () {
+		
+		var data;
+		$.ajax({
+			url: "/sound-data/sample_sound_data",
+			async: false,
+			success: function (csvd) {
+				data = $.csv2Array(csvd);
+			},
+			dataType: "text",
+			complete: function () {
+				// call a function on complete
+			}
+		});
+		alert(data);
 	}
 
 

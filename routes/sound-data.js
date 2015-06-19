@@ -33,4 +33,11 @@ router.delete('/delete-sound-data', function(req,res){
 	});
 });
 
+/*
+ * GET sample sound data csv file
+ */
+router.get('/sample_sound_data', function(req, res) {
+    res.sendfile('./scripts/sample_data.csv');
+});
+
 module.exports = router;
