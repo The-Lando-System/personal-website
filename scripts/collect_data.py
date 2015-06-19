@@ -13,10 +13,9 @@ postFreq = postFreq / collectFreq
 parser = argparse.ArgumentParser(description='Provide ops for the environment')
 parser.add_argument('--ops', action='store_true', default=False, dest='ops')
 args = parser.parse_args()
-#print('value of --ops: ' + str(args.ops))
 
-#sys.exit(0)
 
+# Given a single value of sound data, post it to the website
 def postToWebsite( data ):
 	print(data)
 	postData = {
@@ -31,11 +30,10 @@ def postToWebsite( data ):
 	headers = {'Content-type': 'application/json'}
 	print
 	r = requests.post(url,data=postData,headers=headers)
-	#print(r)
 	return
 
+# Given an array of sound data calculate the average and call the post method with it
 def postProcess( dataArray ):
-	#print(dataArray)
 	total = 0
 	for value in dataArray:
 		total += value
@@ -43,15 +41,13 @@ def postProcess( dataArray ):
 	postToWebsite(str(avg))
 	return
 
-
+# Listen for data on the serial port, process data at the given frequency
 ser = serial.Serial('COM3',9600,timeout=0)
 dataArray = []
 count = 0
-
 while True:
 	data = ser.readline().rstrip().decode("utf-8")
 	if data != '':
-		#print(data)
 		dataArray.append(int(data))
 	else:
 		dataArray.append(0)
@@ -61,4 +57,3 @@ while True:
 		postProcess(dataArray)
 		count = 0
 		dataArray = []
-

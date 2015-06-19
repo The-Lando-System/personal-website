@@ -7,45 +7,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
-
-    <title>Matt's Site</title>
-
-    <!-- Bootstrap core CSS -->
     <link href="/stylesheets/bootstrap.css" rel="stylesheet">
-
-    <!-- Bootstrap theme -->
     <link href="/stylesheets/bootstrap-theme.min.css" rel="stylesheet">
-
+    <link href="/stylesheets/sticky-footer.css" rel="stylesheet">
+    <title>Matt's Site</title>
   </head>
 
   <body role="document" ng-app="myApp" ng-controller="SoundInfoController">
 
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button"
-                  class="navbar-toggle collapsed"
-                  data-toggle="collapse"
-                  data-target="#navbar"
-                  aria-expanded="false"
-                  aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">Hello</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="/">Home</a></li>
-            <li class="active"><a href="#">Sound Project</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <br/>
+    <div ng-include="'nav-bar'"></div>
 
     <!-- Header -->
     <div class="row">
@@ -113,11 +83,11 @@
       <!-- Sound Project Info -->
       <div class="col-md-6">
         <h2>Summary</h2>
-        <p>This page displays sound data collected from my Arduino board via a Piezo transducer. The Piezo will convert a mechanical vibration to an analog signal which then passes through an ADC to output discrete values based on the frequency of vibration. When I plug the Arduino board to my computer, I can read the data on the serial port. I wrote a Python script to collect this data, and post it to an endpoint on this website at a configurable rate. I store the sound data in a Mongo DB back end, and display it in a JS visualization tool called Dynagraph.</p>
-        <p>The point of this project was two-fold: create a website for the first time, and combine it with an Arduino project.</p>
+        <p>This page can display sound data collected from my Arduino board via a Piezo transducer. The Piezo will convert a mechanical vibration to an analog signal which then passes through an ADC to output discrete values based on the frequency of vibration. When I plug the Arduino board to my computer, I can read the data on the serial port. I wrote a Python script to collect this data, and post it to an endpoint on this website at a configurable rate. I store the sound data in a Mongo DB back end, and display it in a JS visualization tool called Dynagraph.</p>
+        <p>The point of this project was two-fold: create a website using the MEAN stack, and combine it with an Arduino project. I was also able to deploy the site to Heroku.</p>
       </div>
       <div class="col-md-6">
-        <h2>Technologies Used</h2>
+        <h2>Technologies, Languages, and Libraries Used</h2>
         <ul class="list-group">
           <li class="list-group-item">MongoDB</li>
           <li class="list-group-item">Express</li>
@@ -163,11 +133,7 @@
       <hr>
     </div>
 
-    <div class="row">
-      <div class="well">
-        <p style="text-align:center; color:#666666;">Hello</p>
-      </div>
-    </div>
+    <div ng-include="'footer'"></div>
 
     <!-- Bootstrap core JavaScript -->
     <!-- Placed at the end of the document so the pages load faster -->

@@ -7,14 +7,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
-
-    <title>Matt's Site</title>
-
-    <!-- Bootstrap core CSS -->
     <link href="/stylesheets/bootstrap.css" rel="stylesheet">
-
-    <!-- Bootstrap theme -->
     <link href="/stylesheets/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="/stylesheets/sticky-footer.css" rel="stylesheet">
+    <title>Matt's Site</title>
   </head>
 
   <body ng-app="myApp" ng-controller="LayoutController">
@@ -46,11 +42,7 @@
       </table>
     </div>
 
-    <div class="row">
-      <div class="well">
-        <p style="text-align:center; color:#666666;">Hello</p>
-      </div>
-    </div>
+    <div ng-include="'footer'"></div>
 
     <!-- Bootstrap core JavaScript -->
     <!-- Placed at the end of the document so the pages load faster -->
