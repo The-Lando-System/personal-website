@@ -126,28 +126,20 @@ myApp.controller('SoundInfoController', ['$scope', function($scope) {
 	 */
 	var listenForSoundData = function(isEnabled,refreshInterval) {
 		var graph;
+		var graphData = '';
+
 
 		$.getJSON('/sound-data/sound-data', function(data){
-
-			var soundData = data;
-			var graphData = '';
-
-			if(soundData !== null){
-				$.each(soundData, function(){
+			if(data !== null) {
+				$.each(data, function(){
 					if (this.timestamp && this.frequency) {
 						graphData += this.timestamp + ',' + this.frequency + '\n';
 					}
 				});
-			} else {
-				return;
 			}
 
-			// if (graphData === ''){
-			// 	return;
-			// }
-
 			if (graphData === '') {
-				graph = new Dygraph(document.getElementById("graphDiv"), "X\n", {});
+				graph = new Dygraph(document.getElementById("graphDiv"), "\n", {});
 			} else {
 				graph = new Dygraph(document.getElementById("graphDiv"), graphData,
 					{
@@ -159,9 +151,8 @@ myApp.controller('SoundInfoController', ['$scope', function($scope) {
 					}
 				);
 			}
-			
-
 		});
+		
 
 		if (isEnabled){
 			window.intervalId = setInterval(function() {
@@ -174,10 +165,10 @@ myApp.controller('SoundInfoController', ['$scope', function($scope) {
 
 					if(soundData !== null){
 						$.each(soundData, function(){
-							graphData += this.timestamp + ',' + this.frequency + '\n';
+							if (this.timestamp && this.frequency) {
+								graphData += this.timestamp + ',' + this.frequency + '\n';
+							}
 						});
-					} else {
-						return;
 					}
 
 					graph.updateOptions( { 'file': graphData } );
