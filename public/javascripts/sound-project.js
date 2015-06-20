@@ -16,6 +16,7 @@ myApp.controller('SoundInfoController', ['$scope', function($scope) {
 				url: '/sound-data/delete-sound-data'
 			}).done(function( response ) {
 				populateSoundDataTable();
+				clearInterval(window.intervalId);
 				listenForSoundData($scope.refreshCheckboxValue,$scope.refreshIntervalValue);
 			});
 
@@ -86,6 +87,7 @@ myApp.controller('SoundInfoController', ['$scope', function($scope) {
 			}).done(function(response){
 				if (response.msg === ''){
 					populateSoundDataTable();
+					clearInterval(window.intervalId);
 					listenForSoundData($scope.refreshCheckboxValue,$scope.refreshIntervalValue);
 				} else {
 					alert('Error: ' + response.msg);
@@ -183,8 +185,13 @@ myApp.controller('SoundInfoController', ['$scope', function($scope) {
 		}
 	};
 
+
+
 	// Execute these functions on page load
-	populateSoundDataTable();
-	listenForSoundData($scope.refreshCheckboxValue,$scope.refreshIntervalValue);
+	angular.element(document).ready(function () {
+		populateSoundDataTable();
+		clearInterval(window.intervalId);
+		listenForSoundData($scope.refreshCheckboxValue,$scope.refreshIntervalValue);
+	});
 
 }]);

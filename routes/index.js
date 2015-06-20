@@ -27,6 +27,11 @@ router.get('/sound-project', function(req, res) {
     res.sendfile(html_dir + 'sound-project.html');
 });
 
+router.get('/to-do-list', function(req, res) {
+    res.sendfile(html_dir + 'to-do-list.html');
+});
+
+
 /*
  * GET a single project
  */

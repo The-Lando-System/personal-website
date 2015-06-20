@@ -13,29 +13,29 @@
     <title>Matt's Site</title>
   </head>
 
-  <body ng-app="myApp" ng-controller="AboutController">
+  <body ng-app="myApp" ng-controller="ToDoController">
 
     <div ng-include="'nav-bar'"></div>
 
-    <div class="page-header">
-      <div class="row">
-        <div class="container">
-          <div class="col-md-1">
-            <img src="/images/me.jpg" alt="Me" class="img-circle" width="75" height="75">
-          </div>
-          <div class="col-md-11">
-            <h1>About Me...</h1>
-          </div>
-        </div>
+    <div class="container">
+      <div class="page-header">
+        <h1>Things to do:</h1>
+      </div>
+      <div id="toDoList" class="row">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>To-Do</th>
+              <th>Description</th>
+              <th></th>
+            </tr>
+          </thead>
+          <!-- This will be populated by projects from the DB -->
+          <tbody>
+          </tbody>
+        </table>
       </div>
     </div>
-
-    <div class="row">
-      <div class="container">
-        <h3>I enjoy coding, hacking, experimenting, and drinking beer.</h3>
-      </div>
-    </div>
-
 
     <div ng-include="'footer'"></div>
 
@@ -43,7 +43,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
     <script src="/javascripts/jquery-2.1.1.min.js"></script>
-    <script src="/javascripts/about.js"></script>
+    <script src="/javascripts/to-do-list.js"></script>
     <script src="/javascripts/bootstrap.min.js"></script>
   </body>
 </html>

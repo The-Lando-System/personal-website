@@ -13,7 +13,7 @@
     <title>Matt's Site</title>
   </head>
 
-  <body ng-app="myApp" ng-controller="LayoutController">
+  <body ng-app="myApp" ng-controller="IndexController">
 
     <div ng-include="'nav-bar'"></div>
 
@@ -24,22 +24,11 @@
       </div>
     </div>
 
-    <div class="page-header">
-      <h1>Things to do:</h1>
-    </div>
-    <div id="projectList" class="row">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>To-Do</th>
-            <th>Description</th>
-            <th></th>
-          </tr>
-        </thead>
-        <!-- This will be populated by projects from the DB -->
-        <tbody>
-        </tbody>
-      </table>
+    <div class="container">
+      <div class="page-header">
+        <h1>My Projects</h1>
+        <p>Coming soon...</p>
+      </div>
     </div>
 
     <div ng-include="'footer'"></div>
@@ -48,7 +37,6 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
     <script src="/javascripts/jquery-2.1.1.min.js"></script>
-    <script src="/javascripts/layout.js"></script>
     <script src="/javascripts/global.js"></script>
     <script src="/javascripts/bootstrap.min.js"></script>
   </body>

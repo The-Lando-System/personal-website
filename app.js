@@ -9,6 +9,7 @@ var mongo = require('mongoskin');
 var routes = require('./routes/index');
 var projects = require('./routes/projects');
 var soundData = require('./routes/sound-data');
+var toDos = require('./routes/to-dos');
 
 var app = express();
 
@@ -40,6 +41,7 @@ app.use(function(req,res,next){
 
 app.use('/', routes);
 app.use('/projects', projects);
+app.use('/to-dos', toDos);
 app.use('/sound-data', soundData);
 
 // catch 404 and forward to error handler
