@@ -11,10 +11,10 @@ $(document).ready(function(){
 	$(document).on('click', '#btnAddToDo', addNewToDo);
 
 	// Delete a ToDo button click
-	$(document).on('click', 'td span#deleteToDo', deleteToDo);
+	$(document).on('click', 'td div span#deleteToDo', deleteToDo);
 
 	// Edit a ToDo button click
-	$(document).on('click', 'td span#editToDo', editToDo);
+	$(document).on('click', 'td div span#editToDo', editToDo);
 
 	// Update a ToDo confirmation click
 	$(document).on('click', 'td span#confirmEditToDo', updateToDo);
@@ -44,8 +44,10 @@ function populateToDoTable() {
 				toDoTableContent += '<td>' + this.todo + '</td>';
 				toDoTableContent += '<td>' + this.description + '</td>';
 				toDoTableContent += '<td>';
-				toDoTableContent += '<span id="editToDo" style="cursor:pointer" class="glyphicon glyphicon-pencil" title="Edit" />';
-				toDoTableContent += '<span id="deleteToDo" style="cursor:pointer; padding-left:1em" class="glyphicon glyphicon-trash" title="Delete" />';
+				toDoTableContent += '<div style="float:left;">';
+				toDoTableContent += '<span id="editToDo" style="cursor:pointer; display:inline; padding-left:10px;" class="glyphicon glyphicon-pencil" title="Edit" />';
+				toDoTableContent += '<span id="deleteToDo" style="cursor:pointer; display:inline; padding-left:10px;" class="glyphicon glyphicon-trash" title="Delete" />';
+				toDoTableContent += '</div>';
 				toDoTableContent += '</td>';
 				toDoTableContent += '</tr>';
 			});
@@ -53,9 +55,9 @@ function populateToDoTable() {
 
 		// Add the input forms for a new ToDo
 		toDoTableContent += '<tr id="newToDoInputs">';
-		toDoTableContent += '<td><input type="text" id="newToDoInput" placeholder="Enter a name" /></td>';
-		toDoTableContent += '<td><input type="text" id="newDescriptionInput" placeholder="Enter a description" style="width:500px;" /></td>';
-		toDoTableContent += '<td><button id="btnAddToDo" class="btn btn-xs btn-primary">Add</button></td>';
+		toDoTableContent += '<td><input class="form-control" type="text" id="newToDoInput" placeholder="Enter a name" /></td>';
+		toDoTableContent += '<td><input class="form-control" type="text" id="newDescriptionInput" placeholder="Enter a description" /></td>';
+		toDoTableContent += '<td><button id="btnAddToDo" class="btn btn-sm btn-primary">Add</button></td>';
 		toDoTableContent += '</tr>';
 
 		// Inject the content into the ToDo table
@@ -115,7 +117,7 @@ function deleteToDo(event){
 	if (confirmation === true){
 
 		// Retrieve the ToDo ID from the parent table row id
-		var toDoId = $(this).parent().parent().attr('id');
+		var toDoId = $(this).parent().parent().parent().attr('id');
 
 
 		$.ajax({
@@ -141,7 +143,7 @@ function editToDo(event){
 	event.preventDefault();
 
 	// Retrieve the ToDo ID from the parent table row id
-	var toDoId = $(this).parent().parent().attr('id');
+	var toDoId = $(this).parent().parent().parent().attr('id');
 
 	// Get the data from the ToDo of interest
 	var arrPos = toDoData.map(function(arrayItem){
@@ -151,13 +153,13 @@ function editToDo(event){
 
 	// Turn the row HTML data into input forms
 	var editToDoHtml = '';
-	editToDoHtml += '<td><input type="text" id="editToDoInput" value="' + toDoToEdit.todo + '"/></td>';
-	editToDoHtml += '<td><input type="text" id="editDescriptionInput" value="' + toDoToEdit.description + '"/></td>';
+	editToDoHtml += '<td><input class="form-control" type="text" id="editToDoInput" value="' + toDoToEdit.todo + '"/></td>';
+	editToDoHtml += '<td><input class="form-control" type="text" id="editDescriptionInput" value="' + toDoToEdit.description + '"/></td>';
 	editToDoHtml += '<td>';
-	editToDoHtml += '<span id="confirmEditToDo" style="cursor:pointer" class="glyphicon glyphicon-ok" title="Confirm Edit" />';
+	editToDoHtml += '<span id="confirmEditToDo" style="cursor:pointer; padding-left:10px;" class="glyphicon glyphicon-ok" title="Confirm Edit" />';
 	editToDoHtml += '</td>';
 
-	$(this).parent().parent().html(editToDoHtml);
+	$(this).parent().parent().parent().html(editToDoHtml);
 }
 
 // Confirm the updates to the ToDo being edited
