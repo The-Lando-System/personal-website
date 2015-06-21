@@ -11,6 +11,16 @@
     <link href="/stylesheets/bootstrap-theme.min.css" rel="stylesheet">
     <link href="/stylesheets/sticky-footer.css" rel="stylesheet">
     <title>Matt's Site</title>
+    <style>
+      img {
+        opacity: 0.4;
+        filter: alpha(opacity=40); /* For IE8 and earlier */
+      }
+      img:hover {
+        opacity: 1.0;
+        filter: alpha(opacity=100); /* For IE8 and earlier */
+      }
+    </style>
   </head>
 
   <body ng-app="myApp" ng-controller="IndexController">
@@ -26,8 +36,13 @@
 
     <div class="container">
       <div class="page-header">
-        <h1>My Projects</h1>
-        <p>Coming soon...</p>
+        <h2>Sound Project</h2>
+        <a href="/sound-project"><img src="/images/sound-project-preview.png" alt="Sound Project" class="img-thumbnail"></a>
+      </div>
+
+      <div class="page-header">
+        <h2>To-Do List</h2>
+        <a href="/to-do-list"><img src="/images/to-do-preview.png" alt="To-Do List" class="img-thumbnail"></a>
       </div>
     </div>
 
