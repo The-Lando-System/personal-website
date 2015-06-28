@@ -10,6 +10,8 @@ var routes = require('./routes/index');
 var projects = require('./routes/projects');
 var soundData = require('./routes/sound-data');
 var toDos = require('./routes/to-dos');
+var kaggles = require('./routes/kaggles');
+var apiFun = require('./routes/api-fun');
 
 var app = express();
 
@@ -43,6 +45,8 @@ app.use('/', routes);
 app.use('/projects', projects);
 app.use('/to-dos', toDos);
 app.use('/sound-data', soundData);
+app.use('/kaggle-projects', kaggles);
+app.use('/api-fun', apiFun);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

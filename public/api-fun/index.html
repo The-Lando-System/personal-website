@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <link href="/stylesheets/bootstrap.css" rel="stylesheet">
+    <link href="/stylesheets/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="/stylesheets/sticky-footer.css" rel="stylesheet">
+    <title>Matt's Site</title>
+  </head>
+
+  <body ng-app="myApp">
+
+    <div ng-include="'../nav-bar'"></div>
+
+    <div class="container" ng-controller="IndexCtrl">
+      <div class="page-header" style="padding-top:1px;">
+        <h1>Fun with APIs</h1>
+      </div>
+      <ul class="nav nav-tabs">
+        <li role="presentation" ng-class="{active: $route.current.activetab == 'main'}"><a href="#/"><strong>API Fun</strong></a></li>
+        <li role="presentation" ng-class="{active: $route.current.activetab == 'github'}"><a href="#/github">GitHub</a></li>
+        <li role="presentation" ng-class="{active: $route.current.activetab == 'codewars'}"><a href="#/codewars">Codewars</a></li>
+        <li role="presentation" ng-class="{active: $route.current.activetab == 'weather'}"><a href="#/weather">Weather Underground</a></li>
+      </ul>
+    </div>
+    <div class="container" ng-view>
+    </div>
+
+    <div ng-include="'../footer'"></div>
+
+    <!-- Bootstrap core JavaScript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+    <script src="/javascripts/jquery-2.1.1.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+
+    <script src="/api-fun/app.js"></script>
+    
+    <script src="/api-fun/indexController.js"></script>
+    <script src="/api-fun/githubController.js"></script>
+    <script src="/api-fun/codewarsController.js"></script>
+    <script src="/api-fun/weatherController.js"></script>
+
+    <script src="/api-fun/filters.js"></script>
+    <script src="/api-fun/services.js"></script>
+    <script src="/api-fun/directives.js"></script>
+  </body>
+</html>
