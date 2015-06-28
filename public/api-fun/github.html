@@ -1,6 +1,5 @@
-<div ng-controller="GitHubCtrl">
-	<h3>The GitHub API</h3>
-	<p> {{ hello }} </p>
-	<p> The number of commits to this repo last week is {{ lastWeeksCommits }}.</p>
-	<p> The number of commits to this repo last year is {{ lastYearsCommits }}.</p>
-</div>
+<h3>The GitHub API</h3>
+<h4>Commit activity over the past 10 weeks</h4>
+<canvas id="myChart" width="700" height="300"></canvas>
+<br/>
+<p> Total commits to this repo over the past year:  <strong>{{ lastYearsCommits }}</strong></p>
