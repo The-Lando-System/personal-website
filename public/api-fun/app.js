@@ -13,7 +13,7 @@ angular.module('myApp', [
   'myApp.directives',
   'ngRoute'
 ]).
-config(function ($routeProvider, $locationProvider) {
+config(function ($routeProvider, $locationProvider, $httpProvider) {
 	$routeProvider.
 		when('/', {
 			templateUrl: 'main',
