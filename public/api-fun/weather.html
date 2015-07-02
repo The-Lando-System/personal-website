@@ -1,5 +1,18 @@
 <h3>The NOAA API</h3>
-<p><strong>Tonight's Forecast:</strong></p>
-<p> {{ tonightsForecast }} </p>
-<p><strong>Tomorrow's Forecast:</strong></p>
-<p> {{ tomorrowsForecast }} </p>
+<form name="zipForm">
+	<input type="text" class="form-control" id="zipCodeInput" ng-model="zipCode" ng-pattern="zipPattern" maxlength="5" style="max-width:75px; display:inline;"><label for="zipCodeInput" style="display:inline; padding-left:10px;">Input your zip code</label>
+</form>
+<br/>
+<button id="zipCodeBtn" ng-click="getWeatherWithZipCode()" class="btn btn-primary">Get Weather</button>
+<br/><br/>
+
+
+<div class="col-md-1">
+	<h4>{{ weatherLocation }}</h4>
+</div>
+<div class="col-md-11">
+	<p><strong>Tonight's Forecast:</strong></p>
+	<p><img ng-src="{{tonightsImg}}" height="20" width="20">  {{ tonightsForecast }} </p>
+	<p><strong>Tomorrow's Forecast:</strong></p>
+	<p><img ng-src="{{tomorrowsImg}}" height="20" width="20">  {{ tomorrowsForecast }} </p>
+</div>

@@ -20,4 +20,9 @@ router.get('/weather', function(req, res) {
     res.sendFile(path.join(__dirname, apiFunDir,'weather.html'));
 });
 
+router.get('/get-zip-data', function(req, res) {
+    res.sendFile(path.join(__dirname, '../public/data/','zipcode.csv'));
+});
+
+
 module.exports = router;

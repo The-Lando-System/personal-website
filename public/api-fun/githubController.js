@@ -48,13 +48,9 @@ angular.module('myApp.githubController', []).
 		});	
   	};
 
-  	var refreshStats = function(){
-  		window.intervalId = setInterval(getGitHubStats, 5000);
-  	};
-
   	angular.element(document).ready(function () {
   		getGitHubStats();
-  		//refreshStats();
+  		getGitHubStats();
   	});
 
   }]);
