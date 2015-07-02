@@ -72,8 +72,9 @@ angular.module('myApp.weatherController', []).
 		return result; //JSON
 	};
 
-
   	var getWeather = function() {
+
+  		$scope.isLoading = true;
 
   		var noaaUrl = customNoaaUrl ? customNoaaUrl : defaultNoaaUrl;
 
@@ -82,6 +83,9 @@ angular.module('myApp.weatherController', []).
   			$scope.tomorrowsForecast = data.data.text[1];
   			$scope.tonightsImg = data.data.iconLink[0];
   			$scope.tomorrowsImg = data.data.iconLink[1];
+
+  			$scope.isLoading = false;
+
   		});
 
   	};
