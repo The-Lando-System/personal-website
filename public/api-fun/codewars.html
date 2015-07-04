@@ -1,4 +1,15 @@
-<div ng-controller="CodewarsCtrl">
-	<h3>The Codewars API</h3>
-	<p> {{ hello }} </p>
+<h3>The Codewars API</h3>
+
+<div class="panel panel-default">
+	<div class="panel-heading"><h4>Stats for my user: {{ username }}</h4></div>
+	<div class="panel-body">
+		<p><strong>Honor: </strong>{{ honor }}</p>
+		<p><strong>Clan Name: </strong>{{ clan }}</p>
+		<p><strong>Leaderboard Position: </strong>{{ leaderboardPosition }}</p>
+		<br/>
+		<p><strong>Languages</strong></p>
+		<ul class="list-group">
+			<li class="list-group-item" ng-repeat="lang in languages">{{ lang }}</li>
+		</ul>
+	</div>
 </div>

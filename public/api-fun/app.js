@@ -11,7 +11,8 @@ angular.module('myApp', [
   'myApp.filters',
   'myApp.services',
   'myApp.directives',
-  'ngRoute'
+  'ngRoute',
+  'ui.bootstrap'
 ]).
 config(function ($routeProvider, $locationProvider, $httpProvider) {
 	$routeProvider.
@@ -25,15 +26,15 @@ config(function ($routeProvider, $locationProvider, $httpProvider) {
 			controller: 'GitHubCtrl',
 			activetab: 'github'
 		}).
-		when('/codewars', {
-			templateUrl: 'codewars',
-			controller: 'CodewarsCtrl',
-			activetab: 'codewars'
-		}).
 		when('/weather', {
 			templateUrl: 'weather',
 			controller: 'WeatherCtrl',
 			activetab: 'weather'
+		}).
+		when('/codewars', {
+			templateUrl: 'codewars',
+			controller: 'CodewarsCtrl',
+			activetab: 'codewars'
 		}).
 		otherwise({
 			redirectTo: '/'

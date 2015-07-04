@@ -24,11 +24,11 @@
       <ul class="nav nav-tabs">
         <li role="presentation" ng-class="{active: $route.current.activetab == 'main'}"><a href="#/"><strong>API Fun</strong></a></li>
         <li role="presentation" ng-class="{active: $route.current.activetab == 'github'}"><a href="#/github">GitHub</a></li>
-        <li role="presentation" ng-class="{active: $route.current.activetab == 'codewars'}"><a href="#/codewars">Codewars</a></li>
         <li role="presentation" ng-class="{active: $route.current.activetab == 'weather'}"><a href="#/weather">NOAA Weather</a></li>
+        <li role="presentation" ng-class="{active: $route.current.activetab == 'codewars'}"><a href="#/codewars">Codewars</a></li>
       </ul>
     </div>
-    <div class="container" ng-view>
+    <div class="container" ng-view style="padding-bottom:10px;">
     </div>
 
     <div ng-include="'../footer'"></div>
@@ -41,6 +41,7 @@
     <script src="/javascripts/bootstrap.min.js"></script>
     <script src="/api-fun/Chart.js"></script>
     <script src="/javascripts/jquery.csv-0.71.min.js"></script>
+    <script src="/javascripts/ui-bootstrap-tpls-0.13.0.js"></script>
 
     <script src="/api-fun/app.js"></script>
     
