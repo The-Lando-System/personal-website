@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/public/images/favicon.ico" type="image/x-icon">
+    <link href="/public/stylesheets/bootstrap.css" rel="stylesheet">
+    <link href="/public/stylesheets/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="/public/stylesheets/sticky-footer.css" rel="stylesheet">
+    <link href="/public/stylesheets/main.css" rel="stylesheet">
+    <title>Matt's Site</title>
+  </head>
+
+  <body ng-app="myApp">
+
+    <div ng-include="'nav-bar'"></div>
+
+    <div ui-view style="padding-bottom:10px;"></div>
+
+    <div ng-include="'footer'"></div>
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/lib/angular/1.3.14/angular.min.js"></script>
+    <script src="/lib/angular/1.3.14/angular-route.min.js"></script>
+    <script src="/lib/angular/1.3.14/angular-ui-router.min.js"></script>
+    <script src="/lib/jquery-2.1.1.min.js"></script>
+    <script src="/lib/jquery.csv-0.71.min.js"></script>
+    <script src="/lib/bootstrap.min.js"></script>
+    <script src="/lib/Chart.js"></script>
+    <script src="/lib/ui-bootstrap-tpls-0.13.0.js"></script>
+    <script src="/lib/d3.min.js" charset="utf-8"></script>
+    <script src="/lib/dygraph-combined.js"></script>
+
+    <script src="/app/app.module.js"></script>
+    <script src="/app/filters.js"></script>
+    <script src="/app/services.js"></script>
+    <script src="/app/directives.js"></script>
+    <script src="/app/routes.js"></script>
+    
+    <script src="/app/main/mainController.js"></script>
+    <script src="/app/api-fun/index/apiIndexController.js"></script>
+    <script src="/app/api-fun/main/apiMainController.js"></script>
+    <script src="/app/api-fun/codewars/codewarsController.js"></script>
+    <script src="/app/api-fun/github/githubController.js"></script>
+    <script src="/app/api-fun/weather/weatherController.js"></script>
+
+    <script src="/app/about/aboutController.js"></script>
+    <script src="/app/sound-project/soundProjectController.js"></script>
+    <script src="/app/to-do/toDoController.js"></script>
+
+  </body>
+</html>

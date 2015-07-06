@@ -1,0 +1,11 @@
+/************************** 
+ * Main Page styling
+ */
+.imgLink {
+  opacity: 0.4;
+  filter: alpha(opacity=40); /* For IE8 and earlier */
+}
+.imgLink:hover {
+  opacity: 1.0;
+  filter: alpha(opacity=100); /* For IE8 and earlier */
+}

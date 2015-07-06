@@ -1,3 +1,8 @@
+/************************** 
+ * app.js - Setup and initialize the Express server
+ *
+ ********/
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -6,12 +11,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongo = require('mongoskin');
 
-var routes = require('./routes/index');
-var projects = require('./routes/projects');
-var soundData = require('./routes/sound-data');
-var toDos = require('./routes/to-dos');
-var kaggles = require('./routes/kaggles');
-var apiFun = require('./routes/api-fun');
+var routes = require('./app/routes/main');
+var soundData = require('./app/routes/sound-data');
+var toDos = require('./app/routes/to-dos');
+var apiFun = require('./app/routes/api-fun');
 
 var app = express();
 
@@ -19,13 +22,11 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname)));
 
 // Set the DB based on environment
 var db;
@@ -42,10 +43,8 @@ app.use(function(req,res,next){
 });
 
 app.use('/', routes);
-app.use('/projects', projects);
 app.use('/to-dos', toDos);
 app.use('/sound-data', soundData);
-app.use('/kaggle-projects', kaggles);
 app.use('/api-fun', apiFun);
 
 // catch 404 and forward to error handler

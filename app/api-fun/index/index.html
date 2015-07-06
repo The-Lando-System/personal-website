@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="page-header" style="padding-top:1px;">
+    <h1>Fun with APIs</h1>
+    <p>{{ hello }}</p>
+  </div>
+  <ul class="nav nav-tabs">
+    <li role="presentation">
+      <a ui-sref=".main"><strong>API Fun</strong></a>
+    </li>
+    <li role="presentation">
+      <a ui-sref=".github">GitHub</a>
+    </li>
+    <li role="presentation" ng-class="{active: $route.current.activetab == 'weather'}">
+      <a ui-sref=".weather">NOAA Weather</a>
+    </li>
+    <li role="presentation" ng-class="{active: $route.current.activetab == 'codewars'}">
+      <a ui-sref=".codewars">Codewars</a>
+    </li>
+  </ul>
+  <div ui-view>
+  </div>
+</div>
