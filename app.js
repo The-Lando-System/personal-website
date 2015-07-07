@@ -35,8 +35,6 @@ if (app.get('env') === 'production') {
 } else {
     db = mongo.db("mongodb://localhost:27017/personal-website", {native_parser:true});
 }
-
-
 app.use(function(req,res,next){
     req.db = db;
     next();

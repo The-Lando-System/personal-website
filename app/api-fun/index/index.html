@@ -1,22 +1,25 @@
-<div class="container">
-  <div class="page-header" style="padding-top:1px;">
+<div class="jumboStyle jumbotron">
+  <div class="container">
     <h1>Fun with APIs</h1>
-    <p>{{ hello }}</p>
   </div>
-  <ul class="nav nav-tabs">
-    <li role="presentation">
-      <a ui-sref=".main"><strong>API Fun</strong></a>
-    </li>
-    <li role="presentation">
-      <a ui-sref=".github">GitHub</a>
-    </li>
-    <li role="presentation" ng-class="{active: $route.current.activetab == 'weather'}">
-      <a ui-sref=".weather">NOAA Weather</a>
-    </li>
-    <li role="presentation" ng-class="{active: $route.current.activetab == 'codewars'}">
-      <a ui-sref=".codewars">Codewars</a>
-    </li>
-  </ul>
-  <div ui-view>
+</div>
+<div class="row">
+  <div class="container">
+    <ul class="nav nav-tabs">
+      <li role="presentation" ui-sref-active="active">
+        <a ui-sref=".main"><strong>API Fun</strong></a>
+      </li>
+      <li role="presentation" ui-sref-active="active">
+        <a ui-sref=".github">GitHub</a>
+      </li>
+      <li role="presentation" ui-sref-active="active">
+        <a ui-sref=".weather">NOAA Weather</a>
+      </li>
+      <li role="presentation" ui-sref-active="active">
+        <a ui-sref=".codewars">Codewars</a>
+      </li>
+    </ul>
+    <div ui-view>
+    </div>
   </div>
 </div>
