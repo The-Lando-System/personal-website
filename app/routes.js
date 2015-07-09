@@ -41,17 +41,17 @@ myApp.config(function ($stateProvider,$urlRouterProvider) {
 			controller: 'ApiMainCtrl'
 		})
 		.state('api-fun.github', {
-			url: '/api-fun/github',
+			url: '/github',
 			templateUrl: '/api-fun/github',
 			controller: 'GitHubCtrl'
 		})
 		.state('api-fun.weather', {
-			url: '/api-fun/weather',
+			url: '/weather',
 			templateUrl: '/api-fun/weather',
 			controller: 'WeatherCtrl'
 		})
 		.state('api-fun.codewars', {
-			url: '/api-fun/codewars',
+			url: '/codewars',
 			templateUrl: '/api-fun/codewars',
 			controller: 'CodewarsCtrl'
 		});

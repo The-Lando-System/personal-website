@@ -46,8 +46,8 @@ router.get('/about', function(req, res) {
   res.sendFile(path.join(__dirname, '../about','about.html'));
 });
 
-router.get('/to-do-list', function(req, res) {
-  res.sendFile(path.join(__dirname, '../to-do','to-do-list.html'));
-});
+// router.get('/to-do-list', function(req, res) {
+//   res.sendFile(path.join(__dirname, '../to-do','to-do-list.html'));
+// });
 
 module.exports = router;
