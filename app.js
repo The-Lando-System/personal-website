@@ -31,7 +31,7 @@ app.use(express.static(path.join(__dirname)));
 // Set the DB based on environment
 var db;
 if (app.get('env') === 'production') {
-    db = mongo.db("mongodb://matt:cool@ds031942.mongolab.com:31942/heroku_app37348606", {native_parser:true});
+    
 } else {
     db = mongo.db("mongodb://localhost:27017/personal-website", {native_parser:true});
 }
