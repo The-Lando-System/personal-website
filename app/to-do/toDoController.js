@@ -23,25 +23,66 @@ $(document).ready(function(){
 // Functions =====================================================
 angular.module('myApp.toDoController', []).
 controller('ToDoCtrl', ['$scope', '$http', '$route', function ($scope, $http, $route) {
+	
+  $scope.addToDo = function() {
+
+
+
+  };
+
+
+  $scope.editToDo = function() {
+
+
+
+  };
+
+
+  $scope.deleteToDo = function() {
+
+
+
+  };
+
+
+  $scope.confirmEditToDo = function() {
+
+  	alert("Confirming edit on to do!");
+
+  };
+
+  var getToDos = function() {
+
+  	$http.get('/to-dos/to-dos').success(function(data, status, headers, config) {
+
+  	  $scope.toDoList = data;
+
+  	});
+
+  };
+
+
+
 	// Execute these functions on page load
-	angular.element(document).ready(function () {
+  angular.element(document).ready(function () {
+
+    getToDos();
 
 		// Populate the ToDo table on page load
-		populateToDoTable();
+		//populateToDoTable();
 
 		// Add new ToDo button click
-		$(document).on('click', '#btnAddToDo', addNewToDo);
+		//$(document).on('click', '#btnAddToDo', addNewToDo);
 
 		// Delete a ToDo button click
-		$(document).on('click', 'td div span#deleteToDo', deleteToDo);
+		//$(document).on('click', 'td div span#deleteToDo', deleteToDo);
 
 		// Edit a ToDo button click
-		$(document).on('click', 'td div span#editToDo', editToDo);
+		//$(document).on('click', 'td div span#editToDo', editToDo);
 
 		// Update a ToDo confirmation click
-		$(document).on('click', 'td span#confirmEditToDo', updateToDo);
-
-	});
+		//$(document).on('click', 'td span#confirmEditToDo', updateToDo);
+  });
 
 }]);
 

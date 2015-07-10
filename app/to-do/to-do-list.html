@@ -13,8 +13,28 @@
           <th></th>
         </tr>
       </thead>
-      <!-- This will be populated by projects from the DB -->
       <tbody>
+        <tr ng-repeat="toDo in toDoList">
+          <td>{{ toDo.todo }}</td>
+          <td>{{ toDo.description }}</td>
+          <td>
+            <div style="float:left;">
+            <span class="toDoIcon glyphicon glyphicon-pencil" title="Edit" ng-click="editToDo()"></span>
+            <span class="toDoIcon glyphicon glyphicon-trash" title="Delete" ng-click="deleteToDo()"></span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input class="form-control" type="text" id="newToDoInput" placeholder="Enter a name" />
+          </td>
+          <td>
+            <input class="form-control" type="text" id="newDescriptionInput" placeholder="Enter a description" />
+          </td>
+          <td>
+            <button id="btnAddToDo" class="btn btn-sm btn-primary" ng-click="addToDo()">Add</button>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>

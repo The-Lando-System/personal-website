@@ -47,3 +47,9 @@ body {
   background: linear-gradient(to bottom,  rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#606c88', endColorstr='#3f4c6b',GradientType=0 );
 }
+
+.toDoIcon {
+  cursor: pointer;
+  display: inline;
+  padding-left: 10px;
+}
