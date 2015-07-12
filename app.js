@@ -10,6 +10,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongo = require('mongoskin');
+var options = require('./options');
 
 var routes = require('./app/routes/main');
 var soundData = require('./app/routes/sound-data');
@@ -31,9 +32,9 @@ app.use(express.static(path.join(__dirname)));
 // Set the DB based on environment
 var db;
 if (app.get('env') === 'production') {
-    db = mongo.db("mongodb://matt:cool@ds031942.mongolab.com:31942/heroku_app37348606", {native_parser:true});
+    db = mongo.db(options.opts.ops.dbUrl,{native_parser:true});
 } else {
-    db = mongo.db("mongodb://localhost:27017/personal-website", {native_parser:true});
+    db = mongo.db(options.opts.dev.dbUrl,{native_parser:true});
 }
 app.use(function(req,res,next){
     req.db = db;
