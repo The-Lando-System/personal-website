@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname)));
 // Set the DB based on environment
 var db;
 if (app.get('env') === 'production') {
-    db = mongo.db(process.env.DB_URL),{native_parser:true});
+    db = mongo.db(process.env.DB_URL,{native_parser:true});
 } else {
     db = mongo.db(options.opts.dev.dbUrl,{native_parser:true});
 }
