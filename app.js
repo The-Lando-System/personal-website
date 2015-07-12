@@ -10,7 +10,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongo = require('mongoskin');
-var options = require('./options');
 
 var routes = require('./app/routes/main');
 var soundData = require('./app/routes/sound-data');
@@ -34,7 +33,7 @@ var db;
 if (app.get('env') === 'production') {
     db = mongo.db(process.env.DB_URL,{native_parser:true});
 } else {
-    db = mongo.db(options.opts.dev.dbUrl,{native_parser:true});
+    db = mongo.db("mongodb://localhost:27017/personal-website",{native_parser:true});
 }
 app.use(function(req,res,next){
     req.db = db;
