@@ -26,21 +26,52 @@ controller('ToDoCtrl', ['$scope', '$http', '$route', function ($scope, $http, $r
 	
   $scope.addToDo = function() {
 
+  	if (!$scope.newToDoName || !$scope.newToDoDesc) {
+  		alert("Please fill out both fields!");
+  		return;
+  	}
+
+  	var newToDo = {
+  		'todo': $scope.newToDoName,
+  		'description': $scope.newToDoDesc
+  	};
+
+  	$http.post('/to-dos/add-to-do', newToDo).
+  	success(function(data, status, headers, config) {
+
+  	}).
+  	then(function(answer){
+  		$scope.newToDoName = '';
+  		$scope.newToDoDesc = '';
+  		getToDos();
+  	});
+};
+
+
+  $scope.editToDo = function(toDo) {
+  	$scope.editToDoName = toDo.todo;
+  	$scope.editToDoDesc = toDo.description;
+
+  	// Make edit mode only apply to the single row...
+  	$scope.editMode = true;
 
 
   };
 
 
-  $scope.editToDo = function() {
+  $scope.deleteToDo = function(toDo) {
+  	var confirmation = confirm('Are you sure you want to delete?');
+		if (!confirmation){
+			return;
+		}
 
+		$http.delete('/to-dos/delete-to-do/' + toDo._id).
+  	success(function(data, status, headers, config) {
 
-
-  };
-
-
-  $scope.deleteToDo = function() {
-
-
+  	}).
+  	then(function(answer){
+  		getToDos();
+  	});
 
   };
 

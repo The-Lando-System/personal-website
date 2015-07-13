@@ -1,6 +1,7 @@
 <div class="jumboStyle jumbotron">
   <div class="container">
     <h1>Things to do:</h1>
+    <p app-version></p>
   </div>
 </div>
 <div class="row">
@@ -15,21 +16,24 @@
       </thead>
       <tbody>
         <tr ng-repeat="toDo in toDoList">
-          <td>{{ toDo.todo }}</td>
+          <td>
+            <span ng-hide="editMode">{{ toDo.todo }}</span>
+            <input class="form-control" type="text" ng-show="editMode" ng-model="editToDoName"/>
+          </td>
           <td>{{ toDo.description }}</td>
           <td>
             <div style="float:left;">
-            <span class="toDoIcon glyphicon glyphicon-pencil" title="Edit" ng-click="editToDo()"></span>
-            <span class="toDoIcon glyphicon glyphicon-trash" title="Delete" ng-click="deleteToDo()"></span>
+            <span class="toDoIcon glyphicon glyphicon-pencil" title="Edit" ng-click="editToDo(toDo)"></span>
+            <span class="toDoIcon glyphicon glyphicon-trash" title="Delete" ng-click="deleteToDo(toDo)"></span>
             </div>
           </td>
         </tr>
         <tr>
           <td>
-            <input class="form-control" type="text" id="newToDoInput" placeholder="Enter a name" />
+            <input class="form-control" type="text" id="newToDoInput" placeholder="Enter a name" ng-model="newToDoName"/>
           </td>
           <td>
-            <input class="form-control" type="text" id="newDescriptionInput" placeholder="Enter a description" />
+            <input class="form-control" type="text" id="newDescriptionInput" placeholder="Enter a description" ng-model="newToDoDesc"/>
           </td>
           <td>
             <button id="btnAddToDo" class="btn btn-sm btn-primary" ng-click="addToDo()">Add</button>
