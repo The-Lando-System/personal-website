@@ -97,6 +97,7 @@ controller('ToDoCtrl', ['$scope', '$http', '$route', function ($scope, $http, $r
 
   $scope.cancelEditToDo = function() {
   	$scope.editToDoId = '';
+  	getToDos();
   };
 
   var getToDos = function() {
