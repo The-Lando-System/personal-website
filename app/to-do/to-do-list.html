@@ -1,7 +1,6 @@
 <div class="jumboStyle jumbotron">
   <div class="container">
     <h1>Things to do:</h1>
-    <p app-version></p>
   </div>
 </div>
 <div class="row">
@@ -17,14 +16,19 @@
       <tbody>
         <tr ng-repeat="toDo in toDoList">
           <td>
-            <span ng-hide="editMode">{{ toDo.todo }}</span>
-            <input class="form-control" type="text" ng-show="editMode" ng-model="editToDoName"/>
+            <span ng-hide="toDo._id === editToDoId">{{ toDo.todo }}</span>
+            <input class="form-control" type="text" ng-show="toDo._id === editToDoId" ng-model="toDo.todo"/>
           </td>
-          <td>{{ toDo.description }}</td>
+          <td>
+            <span ng-hide="toDo._id === editToDoId">{{ toDo.description }}</span>
+            <input class="form-control" type="text" ng-show="toDo._id === editToDoId" ng-model="toDo.description"/>
+          </td>
           <td>
             <div style="float:left;">
-            <span class="toDoIcon glyphicon glyphicon-pencil" title="Edit" ng-click="editToDo(toDo)"></span>
-            <span class="toDoIcon glyphicon glyphicon-trash" title="Delete" ng-click="deleteToDo(toDo)"></span>
+              <span class="toDoIcon glyphicon glyphicon-pencil" title="Edit" ng-click="editToDo(toDo)" ng-hide="toDo._id === editToDoId"></span>
+              <span class="toDoIcon glyphicon glyphicon-trash" title="Delete" ng-click="deleteToDo(toDo)" ng-hide="toDo._id === editToDoId"></span>
+              <span class="toDoIcon glyphicon glyphicon-ok" title="Edit" ng-click="confirmEditToDo(editToDoId)" ng-show="toDo._id === editToDoId"></span>
+              <span class="toDoIcon glyphicon glyphicon-remove" title="Cancel" ng-click="cancelEditToDo()" ng-show="toDo._id === editToDoId"></span>
             </div>
           </td>
         </tr>
