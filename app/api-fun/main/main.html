@@ -1,13 +1,16 @@
 <h3>Explore the various APIs we can tap into on the internet</h3>
 <p>Click the tabs below for my process in tapping into these APIs</p>
+<p>This page was also my exploration in using <a href="https://github.com/angular-ui/bootstrap">Angular UI Bootstrap</a> to manage views within views.</p>
 <accordion close-others="oneAtATime">
     <accordion-group heading="GitHub">
-      Coming soon...
+      <p>The graph is a JS library called <a href="http://www.chartjs.org/">Chart.js</a>. It shows my commit activity to GitHub for this website over the past 10 weeks. I am able to get the data by making a <strong>GET</strong> AJAX call using <strong>$http</strong> to the <strong>repos/The-Lando-System/personal-website/stats/commit_activity</strong> endpoint.</p>
     </accordion-group>
     <accordion-group heading="NOAA Weather">
-      Coming soon...
+      <p>This tab makes a call to NOAAs weather service to return, among other things, a forecast for the weather at the provided latitude and longitude. Due to <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">cross-origin resource sharing (CORS)</a>, I needed to use Angular's <strong>$jsonp</strong> call and add <strong>callback=JSON_CALLBACK</strong> to wrap my request in a callback function.</p>
+      <p>Additionally, I downloaded a CSV file that contains a mapping of latitudes and longitudes to zip codes and cities. When the user chooses a zip code, a request is made to retrieve the CSV file to parse out the latitude and longitude and make the NOAA request with it.</p>
     </accordion-group>
     <accordion-group heading="Codewars">
-      Coming soon...
+      <p><a href="http://www.codewars.com/">Codewars</a> is a site where you can tackle various coding challenges in a variety of languages. You make a profile, join a "clan", and gain "honor" by completing challenges.</p>
+      <p>In order to retrieve profile data associated with my user, I attempted to use Angular's <strong>$http</strong> as well as <strong>$jsonp</strong>. The first way was denied due to CORS and the second way didn't fully work because the Codewars API didn't give me a function to execute with the callback I wrapped in the request. I ended up using <a href="http://www.yahooapis.com/yql/">Yahoo's YQL API</a> as a proxy for making the JSONP request. I only had to supply the proxy server with a "query" parameter in the URL that contains the Codewars endpoint I'm interested in and it returned the data I wanted.</p>
     </accordion-group>
 </accordion>
