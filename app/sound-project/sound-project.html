@@ -59,20 +59,47 @@
       <h2>Technologies Used</h2>
       <ul class="list-group">
         <li class="list-group-item">MongoDB</li>
-        <li class="list-group-item">Express</li>
         <li class="list-group-item">AngularJS</li>
-        <li class="list-group-item">NodeJS</li>
-        <li class="list-group-item">Javascript</li>
+        <li class="list-group-item">jQuery</li>
         <li class="list-group-item">Dygraph</li>
-        <li class="list-group-item">Bootstrap</li>
         <li class="list-group-item">Python</li>
         <li class="list-group-item">Arduino Uno</li>
       </ul>
     </div>
     <div class="col-md-8">
       <h2>Summary</h2>
-      <p>This page can display sound data collected from my Arduino board via a Piezo transducer. The Piezo will convert a mechanical vibration to an analog signal which then passes through an ADC to output discrete values based on the frequency of vibration. When I plug the Arduino board to my computer, I can read the data on the serial port. I wrote a Python script to collect this data, and post it to an endpoint on this website at a configurable rate. I store the sound data in a Mongo DB back end, and display it in a JS visualization tool called Dygraph.</p>
-      <p>The point of this project was two-fold: create a website using the MEAN stack, and combine it with an Arduino project.</p>
+      <p>This page can display sound data collected from my Arduino board via a Piezo transducer. The Piezo will convert a mechanical vibration to an analog signal which then passes through an ADC to output discrete values based on the frequency of vibration.</p>
+      <p>When I plug the Arduino board to my computer, I can read the data on the serial port. I wrote a Python script to collect this data, and post it to an endpoint on this website at a configurable rate.</p>
+      <p>Here's a snippet of the python code that collects the data</p>
+      <div class="awesome codehilite">
+        <p class="para0">
+          <span class="p">ser</span> <span class="o">=</span> <span class="p">serial.Serial(</span><span class="ld">'COM3'</span><span class="p">,</span><span class="l">9600</span><span class="p">,</span><span class="p">timeout</span><span class="o">=</span><span class="l">0</span><span class="p">)</span>
+        </p>
+        <p class="para0">
+          <span class="p">dataArray</span><span class="o"> = </span><span class="p">[]</span>
+        </p>
+        <p class="para0">
+          <span class="p">count</span><span class="o"> = </span><span class="l">0</span>
+        </p>
+        <p class="para0">
+          <span class="o">while</span> <span class="l">True</span><span class="p">:</span>
+        </p>
+        <p class="para1">
+          <span class="p">data</span> <span class="o">=</span> <span class="p">ser.readline().rstrip().decode(</span><span class="ld">"utf-8"</span><span class="p">)</span>
+        </p>
+        <p class="para1">
+          <span class="o">if</span> <span class="p">data</span> <span class="o">!=</span> <span class="ld">''</span><span class="p">:</span>
+        </p>
+        <p class="para2">
+          <span class="p">dataArray.append(</span><span class="k">int</span><span class="p">(data))</span>
+        </p>
+        <p class="para1">
+          <span class="o">else</span> <span class="p">:</span>
+        </p>
+        <p class="para2">
+          <span class="p">dataArray.append(</span><span class="l">0</span><span class="p">)</span>
+        </p>
+      </div>
     </div>
   </div>
 
