@@ -25,7 +25,8 @@ angular.module('myApp.githubController', []).
 				
 			}
 
-
+      Chart.defaults.global.responsive = true;
+      
 			var ctx = $("#myChart").get(0).getContext("2d");
 			var data = {
 			    labels: weeks,

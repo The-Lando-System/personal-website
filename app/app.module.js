@@ -13,6 +13,7 @@ var myApp = angular.module('myApp', [
   'myApp.soundProjectController',
   'myApp.toDoController',
   'myApp.aboutController',
+  'myApp.denoiseController',
   'myApp.filters',
   'myApp.services',
   'myApp.directives',

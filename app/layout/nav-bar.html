@@ -8,14 +8,34 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" ui-sref="home">Home</a>
+      <a class="navbar-brand" ui-sref="home"><i class="fa fa-home"></i> Home</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li><a ui-sref="about" ui-sref-active="active">About</a></li>
-        <li><a ui-sref="sound-project" ui-sref-active="active">Sound Project</a></li>
-        <li><a ui-sref="to-do-list" ui-sref-active="active">To-Do List</a></li>
-        <li><a ui-sref="api-fun" ui-sref-active="active">API Fun</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Data Projects <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a ui-sref="sound-project">Arduino Sound Project</a></li>
+            <li><a ui-sref="denoise">Denoising Documents</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">API Fun <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a ui-sref="api-fun.main">Main</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a ui-sref="api-fun.github">Github</a></li>
+            <li><a ui-sref="api-fun.weather">NOAA Weather</a></li>
+            <li><a ui-sref="api-fun.codewars">Codewars</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Other Projects <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a ui-sref="to-do-list">To-Do List</a></li>
+          </ul>
+        </li>
       </ul>
     </div>
   </div>

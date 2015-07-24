@@ -1,6 +1,9 @@
 angular.module('myApp.toDoController', []).
-controller('ToDoCtrl', ['$scope', '$http', '$route', function ($scope, $http, $route) {
+controller('ToDoCtrl', ['$scope', '$state', '$http', '$route', function ($scope, $state, $http, $route) {
 	
+  $scope.$state = $state;
+
+
   $scope.addToDo = function() {
 
 

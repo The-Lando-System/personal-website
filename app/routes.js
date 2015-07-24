@@ -7,7 +7,10 @@
 
 myApp.config(function ($stateProvider,$urlRouterProvider) {
 	
-	$urlRouterProvider.when('/api-fun', '/api-fun/main').otherwise('/');
+	$urlRouterProvider
+		.when('/api-fun', '/api-fun/main')
+		.when('/to-do-list', '/to-do-list/to-dos')
+		.otherwise('/');
 
 	$stateProvider
 		.state('home', {
@@ -25,10 +28,25 @@ myApp.config(function ($stateProvider,$urlRouterProvider) {
 			templateUrl: '/to-do-list',
 			controller: 'ToDoCtrl'
 		})
+		.state('to-do-list.to-dos', {
+			url: '/to-dos',
+			templateUrl: '/to-do-list/to-dos',
+			controller: 'ToDoCtrl'
+		})
+		.state('to-do-list.description', {
+			url: '/description',
+			templateUrl: '/to-do-list/description',
+			controller: 'ToDoCtrl'
+		})
 		.state('about', {
 			url: '/about',
 			templateUrl: '/about',
 			controller: 'AboutCtrl'
+		})
+		.state('denoise', {
+			url: '/denoise',
+			templateUrl: '/denoise',
+			controller: 'DenoiseCtrl'
 		})
 		.state('api-fun', {
 			url: '/api-fun',

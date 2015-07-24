@@ -47,7 +47,19 @@ router.get('/about', function(req, res) {
 });
 
 router.get('/to-do-list', function(req, res) {
+  res.sendFile(path.join(__dirname, '../to-do','to-do-list-shell.html'));
+});
+
+router.get('/to-do-list/to-dos', function(req, res) {
   res.sendFile(path.join(__dirname, '../to-do','to-do-list.html'));
+});
+
+router.get('/to-do-list/description', function(req, res) {
+  res.sendFile(path.join(__dirname, '../to-do','to-do-list-description.html'));
+});
+
+router.get('/denoise', function(req, res) {
+  res.sendFile(path.join(__dirname, '../denoising-documents','denoise-documents.html'));
 });
 
 module.exports = router;

@@ -122,3 +122,10 @@ a:focus {
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
   background-repeat: repeat-x;
 }
+
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  color: #fff;
+  background-color: #428bca;
+}

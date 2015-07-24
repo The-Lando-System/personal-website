@@ -1,49 +1,40 @@
-<div class="jumboStyle jumbotron">
-  <div class="container">
-    <h1>Things to do:</h1>
-  </div>
-</div>
-<div class="row">
-  <div id="toDoList" class="container">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>To-Do</th>
-          <th>Description</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="toDo in toDoList">
-          <td>
-            <span ng-hide="toDo._id === editToDoId">{{ toDo.todo }}</span>
-            <input class="form-control" type="text" ng-show="toDo._id === editToDoId" ng-model="toDo.todo"/>
-          </td>
-          <td>
-            <span ng-hide="toDo._id === editToDoId">{{ toDo.description }}</span>
-            <input class="form-control" type="text" ng-show="toDo._id === editToDoId" ng-model="toDo.description"/>
-          </td>
-          <td>
-            <div style="float:left;">
-              <span class="toDoIcon glyphicon glyphicon-pencil" title="Edit" ng-click="editToDo(toDo)" ng-hide="toDo._id === editToDoId"></span>
-              <span class="toDoIcon glyphicon glyphicon-trash" title="Delete" ng-click="deleteToDo(toDo)" ng-hide="toDo._id === editToDoId"></span>
-              <span class="toDoIcon glyphicon glyphicon-ok" title="Edit" ng-click="confirmEditToDo(editToDoId)" ng-show="toDo._id === editToDoId"></span>
-              <span class="toDoIcon glyphicon glyphicon-remove" title="Cancel" ng-click="cancelEditToDo()" ng-show="toDo._id === editToDoId"></span>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input class="form-control" type="text" id="newToDoInput" placeholder="Enter a name" ng-model="newToDoName"/>
-          </td>
-          <td>
-            <input class="form-control" type="text" id="newDescriptionInput" placeholder="Enter a description" ng-model="newToDoDesc"/>
-          </td>
-          <td>
-            <button id="btnAddToDo" class="btn btn-sm btn-primary" ng-click="addToDo()">Add</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>To-Do</th>
+      <th>Description</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="toDo in toDoList">
+      <td>
+        <span ng-hide="toDo._id === editToDoId">{{ toDo.todo }}</span>
+        <input class="form-control" type="text" ng-show="toDo._id === editToDoId" ng-model="toDo.todo"/>
+      </td>
+      <td>
+        <span ng-hide="toDo._id === editToDoId">{{ toDo.description }}</span>
+        <input class="form-control" type="text" ng-show="toDo._id === editToDoId" ng-model="toDo.description"/>
+      </td>
+      <td>
+        <div style="float:left;">
+          <span class="toDoIcon glyphicon glyphicon-pencil" title="Edit" ng-click="editToDo(toDo)" ng-hide="toDo._id === editToDoId"></span>
+          <span class="toDoIcon glyphicon glyphicon-trash" title="Delete" ng-click="deleteToDo(toDo)" ng-hide="toDo._id === editToDoId"></span>
+          <span class="toDoIcon glyphicon glyphicon-ok" title="Edit" ng-click="confirmEditToDo(editToDoId)" ng-show="toDo._id === editToDoId"></span>
+          <span class="toDoIcon glyphicon glyphicon-remove" title="Cancel" ng-click="cancelEditToDo()" ng-show="toDo._id === editToDoId"></span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <input class="form-control" type="text" id="newToDoInput" placeholder="Enter a name" ng-model="newToDoName"/>
+      </td>
+      <td>
+        <input class="form-control" type="text" id="newDescriptionInput" placeholder="Enter a description" ng-model="newToDoDesc"/>
+      </td>
+      <td>
+        <button id="btnAddToDo" class="btn btn-sm btn-primary" ng-click="addToDo()">Add</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
