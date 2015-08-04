@@ -5,8 +5,10 @@
  *
  ********/
 
-myApp.config(function ($stateProvider,$urlRouterProvider) {
-	
+myApp.config(function ($stateProvider,$urlRouterProvider,$locationProvider) {
+
+	//$locationProvider.html5Mode(true);
+
 	$urlRouterProvider
 		.when('/api-fun', '/api-fun/main')
 		.when('/to-do-list', '/to-do-list/to-dos')

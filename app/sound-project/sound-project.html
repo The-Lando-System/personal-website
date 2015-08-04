@@ -100,6 +100,59 @@
           <span class="p">dataArray.append(</span><span class="l">0</span><span class="p">)</span>
         </p>
       </div>
+      <br/>
+      <p>After I append serial data into the <span class="inline-code">dataArray</span> object, I send the array to a post processing function at a configurable rate. In the post processing function, I calculate the average value of the data in the array. I then send that average value to the following function: </p>
+      <div class="awesome codehilite">
+        <p class="para0">
+          <span class="p">ser</span> <span class="o">=</span> <span class="p">serial.Serial(</span><span class="ld">'COM3'</span><span class="p">,</span><span class="l">9600</span><span class="p">,</span><span class="p">timeout</span><span class="o">=</span><span class="l">0</span><span class="p">)</span>
+        </p>
+        <p class="para0">
+          <span class="p">dataArray</span><span class="o"> = </span><span class="p">[]</span>
+        </p>
+        <p class="para0">
+          <span class="p">count</span><span class="o"> = </span><span class="l">0</span>
+        </p>
+        <p class="para0">
+          <span class="o">while</span> <span class="l">True</span><span class="p">:</span>
+        </p>
+        <p class="para1">
+          <span class="p">data</span> <span class="o">=</span> <span class="p">ser.readline().rstrip().decode(</span><span class="ld">"utf-8"</span><span class="p">)</span>
+        </p>
+        <p class="para1">
+          <span class="o">if</span> <span class="p">data</span> <span class="o">!=</span> <span class="ld">''</span><span class="p">:</span>
+        </p>
+        <p class="para2">
+          <span class="p">dataArray.append(</span><span class="k">int</span><span class="p">(data))</span>
+        </p>
+        <p class="para1">
+          <span class="o">else</span> <span class="p">:</span>
+        </p>
+        <p class="para2">
+          <span class="p">dataArray.append(</span><span class="l">0</span><span class="p">)</span>
+        </p>
+      </div>
+
+
+<!--
+
+# Given a single value of sound data, post it to the website
+def postToWebsite( data ):
+  postData = {
+    "frequency": data,
+    "timestamp": datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%f")
+  }
+  postData = json.dumps(postData)
+  url = 'http://localhost:3000/sound-data/add-sound-data'
+  if args.ops:
+    url = 'http://www.mattvoget.com/sound-data/add-sound-data'
+
+  headers = {'Content-type': 'application/json'}
+  r = requests.post(url,data=postData,headers=headers)
+  return
+
+-->
+
+
     </div>
   </div>
 

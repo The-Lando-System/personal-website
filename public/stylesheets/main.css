@@ -129,3 +129,8 @@ a:focus {
   color: #fff;
   background-color: #428bca;
 }
+
+.inline-code {
+  font-family: monospace, serif;
+  font-weight: bold;
+}

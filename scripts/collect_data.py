@@ -17,7 +17,6 @@ args = parser.parse_args()
 
 # Given a single value of sound data, post it to the website
 def postToWebsite( data ):
-	print(data)
 	postData = {
 		"frequency": data,
 		"timestamp": datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%f")
@@ -25,10 +24,9 @@ def postToWebsite( data ):
 	postData = json.dumps(postData)
 	url = 'http://localhost:3000/sound-data/add-sound-data'
 	if args.ops:
-		url = 'https://landosnotasystem.herokuapp.com/sound-data/add-sound-data'
+		url = 'http://www.mattvoget.com/sound-data/add-sound-data'
 
 	headers = {'Content-type': 'application/json'}
-	print
 	r = requests.post(url,data=postData,headers=headers)
 	return
 
