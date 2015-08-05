@@ -1,12 +1,12 @@
 angular.module('myApp.weatherController', []).
   controller('WeatherCtrl', ['$scope', '$http', '$route', function ($scope, $http, $route) {
   	
-  	var defaultNoaaUrl = 'http://forecast.weather.gov/MapClick.php?lat=38.9508964&lon=-77.3992481&FcstType=json&callback=JSON_CALLBACK';
+  	var defaultNoaaUrl = 'http://forecast.weather.gov/MapClick.php?lat=39.044969&lon=-104.83755&FcstType=json&callback=JSON_CALLBACK';
   	var customNoaaUrl;
 
   	$scope.zipPattern = /\d{5}/
 
-  	$scope.weatherLocation = 'Herndon';
+  	$scope.weatherLocation = 'Colorado Springs';
 
   	$scope.getWeatherWithZipCode = function() {
 

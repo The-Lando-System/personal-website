@@ -7,7 +7,6 @@
 
 myApp.config(function ($stateProvider,$urlRouterProvider,$locationProvider) {
 
-	//$locationProvider.html5Mode(true);
 
 	$urlRouterProvider
 		.when('/api-fun', '/api-fun/main')
@@ -74,5 +73,10 @@ myApp.config(function ($stateProvider,$urlRouterProvider,$locationProvider) {
 			url: '/codewars',
 			templateUrl: '/api-fun/codewars',
 			controller: 'CodewarsCtrl'
+		});
+
+		$locationProvider.html5Mode({
+		  enabled: true,
+		  requireBase: false
 		});
 });
