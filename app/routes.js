@@ -5,7 +5,7 @@
  *
  ********/
 
-myApp.config(function ($stateProvider,$urlRouterProvider,$locationProvider) {
+myApp.config(function ($stateProvider,$urlRouterProvider) {
 
 
 	$urlRouterProvider
@@ -44,10 +44,10 @@ myApp.config(function ($stateProvider,$urlRouterProvider,$locationProvider) {
 			templateUrl: '/about',
 			controller: 'AboutCtrl'
 		})
-		.state('denoise', {
-			url: '/denoise',
-			templateUrl: '/denoise',
-			controller: 'DenoiseCtrl'
+		.state('image-reader', {
+			url: '/image-reader',
+			templateUrl: '/image-reader',
+			controller: 'ImageReaderCtrl'
 		})
 		.state('api-fun', {
 			url: '/api-fun',
@@ -73,10 +73,5 @@ myApp.config(function ($stateProvider,$urlRouterProvider,$locationProvider) {
 			url: '/codewars',
 			templateUrl: '/api-fun/codewars',
 			controller: 'CodewarsCtrl'
-		});
-
-		$locationProvider.html5Mode({
-		  enabled: true,
-		  requireBase: false
 		});
 });

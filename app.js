@@ -15,7 +15,7 @@ var routes = require('./app/routes/main');
 var soundData = require('./app/routes/sound-data');
 var toDos = require('./app/routes/to-dos');
 var apiFun = require('./app/routes/api-fun');
-var denoise = require('./app/routes/denoise-docs');
+var imageReader = require('./app/routes/image-reader');
 
 var app = express();
 
@@ -45,7 +45,7 @@ app.use('/', routes);
 app.use('/to-dos', toDos);
 app.use('/sound-data', soundData);
 app.use('/api-fun', apiFun);
-app.use('/denoise', denoise);
+app.use('/image-reader', imageReader);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

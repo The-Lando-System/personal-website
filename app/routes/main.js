@@ -58,8 +58,8 @@ router.get('/to-do-list/description', function(req, res) {
   res.sendFile(path.join(__dirname, '../to-do','to-do-list-description.html'));
 });
 
-router.get('/denoise', function(req, res) {
-  res.sendFile(path.join(__dirname, '../denoising-documents','denoise-documents.html'));
+router.get('/image-reader', function(req, res) {
+  res.sendFile(path.join(__dirname, '../image-reader','image-reader.html'));
 });
 
 module.exports = router;
