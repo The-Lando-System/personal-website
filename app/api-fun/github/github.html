@@ -1,5 +1,6 @@
 <h3>The GitHub API</h3>
 <h4>Commit activity over the past 10 weeks</h4>
+<button id="refreshChart" ng-click="getGitHubStats()" class="btn btn-info">Refresh Chart</button>
 <canvas id="myChart" height="200"></canvas>
 <br/>
 <p> Total commits to this repo over the past year:  <strong>{{ lastYearsCommits }}</strong></p>
