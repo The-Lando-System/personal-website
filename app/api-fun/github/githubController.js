@@ -4,7 +4,7 @@ angular.module('myApp.githubController', []).
   	$scope.lastYearsCommits = 0;
   	$scope.lastWeeksCommits = 0;
 
-  	var getGitHubStats = function(){
+  	$scope.getGitHubStats = function(){
   		var myGitHubUrl = 'https://api.github.com/repos/The-Lando-System/personal-website/stats/commit_activity';
 
 	  	$http.get(myGitHubUrl).success(function(data, status, headers, config) {
@@ -25,7 +25,7 @@ angular.module('myApp.githubController', []).
 				
 			}
 
-      Chart.defaults.global.responsive = true;
+      		Chart.defaults.global.responsive = true;
       
 			var ctx = $("#myChart").get(0).getContext("2d");
 			var data = {
@@ -46,11 +46,13 @@ angular.module('myApp.githubController', []).
 
 			var myLineChart = new Chart(ctx).Line(data);
 
-		});	
+		});
+
+		//$scope.$apply();
   	};
 
   	angular.element(document).ready(function () {
-  		getGitHubStats();
+  		$scope.getGitHubStats();
   		//getGitHubStats();
   	});
 
