@@ -11,7 +11,7 @@ angular.module('myApp.weatherController', []).
   	$scope.getWeatherWithZipCode = function() {
 
   		if (!$scope.zipForm.$valid || !$scope.zipCode){
-  			alert("Please enter a valid zip code");
+  			alert("WHAT AN IDIOT!!!! Please enter a valid zip code.");
   			return;
   		}
 
