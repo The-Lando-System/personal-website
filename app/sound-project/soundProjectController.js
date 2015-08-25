@@ -3,26 +3,48 @@ controller('SoundProjectCtrl', ['$scope', '$http', '$route', function ($scope, $
 	
 
 	/* 
+	 * Confirmation Modal to delete data
+	 */
+	 $scope.showModal = false;
+	 $scope.deleteConfirmed = false;
+	 $scope.confirmDelete = function(){
+	 	 $scope.showModal = !$scope.showModal;
+	 }
+
+	 $scope.confirmYesDelete = function() {
+	 	$scope.deleteConfirmed = true;
+	 	$scope.deleteSoundData();
+	 	$scope.showModal = false;
+	 }
+
+	 $scope.confirmNoDelete = function() {
+	 	$scope.deleteConfirmed = false;
+	 	$scope.showModal = false;
+	 }
+	
+
+	/* 
 	 * Delete the sound data
 	 */
+	
 	$scope.deleteSoundData = function() {
 
 		// Confirm the delete with a dialog
-		var confirmation = confirm('Are you sure you want to reset the data?');
-		if (confirmation === true){
+		// var confirmation = confirm('Are you sure you want to reset the data?');
+		// if (confirmation === true){
 
-			$.ajax({
-				type: 'DELETE',
-				url: '/sound-data/delete-sound-data'
-			}).done(function( response ) {
-				populateSoundDataTable();
-				clearInterval(window.intervalId);
-				listenForSoundData($scope.refreshCheckboxValue,$scope.refreshIntervalValue);
-			});
+		$.ajax({
+			type: 'DELETE',
+			url: '/sound-data/delete-sound-data'
+		}).done(function( response ) {
+			populateSoundDataTable();
+			clearInterval(window.intervalId);
+			listenForSoundData($scope.refreshCheckboxValue,$scope.refreshIntervalValue);
+		});
 
-		} else {
-			return false;
-		}
+		// } else {
+		// 	return false;
+		// }
 	};
 
 	/*

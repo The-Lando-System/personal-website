@@ -33,8 +33,17 @@
             </div>
 
             <div style="padding-top:10px">
-              <button id="deleteSoundDataBtn" ng-click="deleteSoundData()" class="btn btn-warning">Reset Data</button>
+              <button id="deleteSoundDataBtn" ng-click="confirmDelete()" class="btn btn-warning">Reset Data</button>
             </div>
+
+            <modal title="Are you sure?" visible="showModal">
+              <div class="container">
+                <button id="confirmYes" ng-click="confirmYesDelete()" class="btn btn-danger">Yes...</button>
+                <button id="confirmNo" ng-click="confirmNoDelete()" class="btn">Cancel</button>
+              </div>
+            </modal>
+
+
 
             <!-- Load Sample Data Button -->
             <div style="padding-top:10px">
