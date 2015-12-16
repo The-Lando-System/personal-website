@@ -73,5 +73,10 @@ myApp.config(function ($stateProvider,$urlRouterProvider) {
 			url: '/codewars',
 			templateUrl: '/api-fun/codewars',
 			controller: 'CodewarsCtrl'
+		})
+		.state('api-fun.reddit', {
+			url: '/reddit',
+			templateUrl: '/api-fun/reddit',
+			controller: 'RedditCtrl'
 		});
 });

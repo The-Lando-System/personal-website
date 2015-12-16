@@ -10,6 +10,7 @@ var myApp = angular.module('myApp', [
   'myApp.githubController',
   'myApp.weatherController',
   'myApp.codewarsController',
+  'myApp.redditController',
   'myApp.soundProjectController',
   'myApp.toDoController',
   'myApp.aboutController',

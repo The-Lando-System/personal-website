@@ -1,0 +1,18 @@
+<h3>Reddit</h3>
+
+<div class="panel panel-default">
+	<div class="panel-heading"><h4>{{ hello }}</h4></div>
+	<div class="panel-body">
+		<div class="col-md-8">
+			<ul ng-repeat="post in posts">
+				<li><a ng-href="{{post.data.url}}"><span ng-show="post.data.post_hint === 'image'">IMAGE: </span>{{post.data.title}}</a></li>
+			</ul>
+		</div>
+		<div class="col-md-4">
+			<h2 style="text-shadow: 2px 2px #a6a6a6;">Most Popular Words</h2>
+			<div ng-repeat="topWord in topWords | orderBy:'-'">
+				<h3>{{topWord.word}}</h3>
+			</div>
+		</div>
+	</div>
+</div>

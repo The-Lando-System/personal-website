@@ -38,6 +38,10 @@ router.get('/api-fun/codewars', function(req, res) {
   res.sendFile(path.join(__dirname, '../api-fun/codewars','codewars.html'));
 });
 
+router.get('/api-fun/reddit', function(req, res) {
+  res.sendFile(path.join(__dirname, '../api-fun/reddit','reddit.html'));
+});
+
 router.get('/sound-project', function(req, res) {
   res.sendFile(path.join(__dirname, '../sound-project','sound-project.html'));
 });
