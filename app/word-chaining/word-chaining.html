@@ -1,0 +1,53 @@
+<div class="jumboStyle jumbotron">
+  <div class="container">
+    <h1>Word Chaining</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="container col-md-2">
+    <select name="singleSelect" ng-model="dictionarySize">
+      <option value="1">1 Letter Words</option>
+      <option value="2">2 Letter Words</option>
+      <option value="3">3 Letter Words</option>
+      <option value="4">4 Letter Words</option>
+      <option value="5">5 Letter Words</option>
+      <option value="6">6 Letter Words</option>
+      <option value="7">7 Letter Words</option>
+      <option value="100">All Words</option>
+    </select>
+  </div>
+  <div class="container col-md-5">
+    <h2>Anagram Algorithm</h2>
+    <button ng-click="chainWords()" class="btn btn-primary">Find Word Chains</button>
+    <div class="container" ng-show="loading">
+      <img src="/public/images/hex-loader2.gif" height="100" width="150">
+    </div>
+    <div ng-show="longestChain.chain.chainLength>0">
+      <h4>The longest chain of words is {{longestChain.chain.chainLength}} words long and took {{longestChain.time}} ms. Max length of words in the dictionary is {{dictionarySize}}</h4>
+      <ul ng-repeat="word in longestChain.chain.words">
+        <li>{{word}}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="container col-md-5">
+    <h2>Substring Algorithm</h2>
+    <button ng-click="chainWords2()" class="btn btn-primary">Find Word Chains</button>
+    <div class="container" ng-show="loading2">
+      <img src="/public/images/hex-loader2.gif" height="100" width="150">
+    </div>
+    <div ng-show="longestChain2.chain.chainLength>0">
+      <h4>The longest chain of words is {{longestChain2.chain.chainLength}} words long and took {{longestChain2.time}} ms. Max length of words in the dictionary is {{dictionarySize}}</h4>
+      <ul ng-repeat="word in longestChain2.chain.words">
+        <li>{{word}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="row" style="margin-top:10px;">
+  <div class="container">
+    <button ng-click="getRandomWord()" class="btn btn-primary">Get Random Word</button>
+    <h3>The Random Word is... {{ randomWord }}</h3>
+  </div>
+</div>

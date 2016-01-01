@@ -24,6 +24,11 @@ myApp.config(function ($stateProvider,$urlRouterProvider) {
 			templateUrl: '/sound-project',
 			controller: 'SoundProjectCtrl'
 		})
+		.state('word-chaining', {
+			url: '/word-chaining',
+			templateUrl: '/word-chaining',
+			controller: 'WordChainingCtrl'
+		})
 		.state('to-do-list', {
 			url: '/to-do-list',
 			templateUrl: '/to-do-list',

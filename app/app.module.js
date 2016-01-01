@@ -15,6 +15,7 @@ var myApp = angular.module('myApp', [
   'myApp.toDoController',
   'myApp.aboutController',
   'myApp.imageReaderController',
+  'myApp.wordChainingController',
   'myApp.filters',
   'myApp.services',
   'myApp.directives',

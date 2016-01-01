@@ -134,3 +134,8 @@ a:focus {
   font-family: monospace, serif;
   font-weight: bold;
 }
+
+.progress {
+  margin-top: 10px;
+  width: 50%;
+}

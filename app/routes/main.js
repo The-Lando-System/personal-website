@@ -46,6 +46,10 @@ router.get('/sound-project', function(req, res) {
   res.sendFile(path.join(__dirname, '../sound-project','sound-project.html'));
 });
 
+router.get('/word-chaining', function(req, res) {
+  res.sendFile(path.join(__dirname, '../word-chaining','word-chaining.html'));
+});
+
 router.get('/about', function(req, res) {
   res.sendFile(path.join(__dirname, '../about','about.html'));
 });
