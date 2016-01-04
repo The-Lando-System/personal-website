@@ -18,20 +18,20 @@
     </select>
   </div>
   <div class="container col-md-5">
-    <h2>Anagram Algorithm</h2>
-    <button ng-click="chainWords()" class="btn btn-primary">Find Word Chains</button>
-    <div class="container" ng-show="loading">
+    <h2>Chainer 1</h2>
+    <button ng-click="chainWords1()" class="btn btn-primary">Find Word Chains</button>
+    <div class="container" ng-show="loading1">
       <img src="/public/images/hex-loader2.gif" height="100" width="150">
     </div>
-    <div ng-show="longestChain.chain.chainLength>0">
-      <h4>The longest chain of words is {{longestChain.chain.chainLength}} words long and took {{longestChain.time}} ms. Max length of words in the dictionary is {{dictionarySize}}</h4>
-      <ul ng-repeat="word in longestChain.chain.words">
+    <div ng-show="longestChain1.chain.chainLength>0">
+      <h4>The longest chain of words is {{longestChain1.chain.chainLength}} words long and took {{longestChain1.time}} ms. Max length of words in the dictionary is {{dictionarySize}}</h4>
+      <ul ng-repeat="word in longestChain1.chain.words">
         <li>{{word}}</li>
       </ul>
     </div>
   </div>
   <div class="container col-md-5">
-    <h2>Substring Algorithm</h2>
+    <h2>Chainer 2</h2>
     <button ng-click="chainWords2()" class="btn btn-primary">Find Word Chains</button>
     <div class="container" ng-show="loading2">
       <img src="/public/images/hex-loader2.gif" height="100" width="150">

@@ -12,26 +12,26 @@ controller('WordChainingCtrl', ['$scope', '$http', function ($scope, $http) {
 	};
 
 	$scope.dictionarySize = 4;
-	$scope.longestChain = {chain:[],time:0};
-	$scope.loading = false;
+	$scope.longestChain1 = {chain:[],time:0};
+	$scope.loading1 = false;
 	$scope.longestChain2 = {chain:[],time:0};
 	$scope.loading2 = false;
 
-	$scope.chainWords = function(){
-		$scope.longestChain = {chain:[],time:0};
-		$scope.loading = true;
-		$http.get(wordServiceDomain + '/longest-chain/' + $scope.dictionarySize)
+	$scope.chainWords1 = function(){
+		$scope.longestChain1 = {chain:[],time:0};
+		$scope.loading1 = true;
+		$http.get(wordServiceDomain + '/chainer1/' + $scope.dictionarySize)
 		.success(function(data){
 			console.log(data);
-			$scope.longestChain = data;
-			$scope.loading = false;
+			$scope.longestChain1 = data;
+			$scope.loading1 = false;
 		});
 	};
 
 	$scope.chainWords2 = function(){
 		$scope.longestChain2 = {chain:[],time:0};
 		$scope.loading2 = true;
-		$http.get(wordServiceDomain + '/longest-chain2/' + $scope.dictionarySize)
+		$http.get(wordServiceDomain + '/chainer2/' + $scope.dictionarySize)
 		.success(function(data){
 			console.log(data);
 			$scope.longestChain2 = data;
