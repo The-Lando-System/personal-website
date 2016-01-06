@@ -70,4 +70,9 @@ router.get('/image-reader', function(req, res) {
   res.sendFile(path.join(__dirname, '../image-reader','image-reader.html'));
 });
 
+router.post('/dictionary', function(req,res) {
+  console.log(req.body);
+  res.send(req.body);
+});
+
 module.exports = router;

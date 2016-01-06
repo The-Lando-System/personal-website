@@ -1,7 +1,8 @@
 angular.module('myApp.wordChainingController', []).
-controller('WordChainingCtrl', ['$scope', '$http', function ($scope, $http) {
+controller('WordChainingCtrl', ['$scope', '$http', 'FileUploader', function ($scope, $http, FileUploader) {
 	//var wordServiceDomain = 'http://word-service.mattvoget.com';
 	var wordServiceDomain = 'http://localhost:3001';
+	var wordChainerDomain = 'http://localhost:3002';
 	$scope.hello = "Welcome to the word chainer!";
 	$scope.randomWord = '';
 	$scope.getRandomWord = function(){
@@ -20,12 +21,16 @@ controller('WordChainingCtrl', ['$scope', '$http', function ($scope, $http) {
 	$scope.chainWords1 = function(){
 		$scope.longestChain1 = {chain:[],time:0};
 		$scope.loading1 = true;
-		$http.get(wordServiceDomain + '/chainer1/' + $scope.dictionarySize)
+		$http.get(wordServiceDomain + '/dictionary/5')
 		.success(function(data){
-			console.log(data);
-			$scope.longestChain1 = data;
-			$scope.loading1 = false;
+			$http.post(wordChainerDomain + '/longest-chain/', data.words)
+			.success(function(data){
+				console.log(data);
+				$scope.longestChain1 = data;
+				$scope.loading1 = false;
+			});
 		});
+		
 	};
 
 	$scope.chainWords2 = function(){
@@ -38,5 +43,11 @@ controller('WordChainingCtrl', ['$scope', '$http', function ($scope, $http) {
 			$scope.loading2 = false;
 		});
 	};
+
+	var uploader = $scope.uploader = new FileUploader({url:'dictionary'});
+
+	uploader.onCompleteItem = function(fileItem, response, status, headers) {
+        console.info('onCompleteItem', fileItem, response, status, headers);
+    };
 
 }]);

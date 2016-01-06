@@ -21,5 +21,6 @@ var myApp = angular.module('myApp', [
   'myApp.directives',
   'ui.router',
   'ngRoute',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'angularFileUpload'
 ]);
