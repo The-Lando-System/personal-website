@@ -6,61 +6,123 @@
 
 <div class="row">
   <div class="container">
-    <input type="file" nv-file-select uploader="uploader"/><br/>
-    <ul>
-      <li ng-repeat="item in uploader.queue">
-          Name: <span ng-bind="item.file.name"></span><br/>
-        <button ng-click="item.upload()">upload</button>
-      </li>
-    </ul>
 
-  </div>
-</div>
+    <!-- Description Column --> 
+    <div class="col-md-8">
+      <h2>Welcome to the word chainer!</h2>
+      <p>
+        The word chainer is an algorithm that when given a dictionary, or rather, an array of words, it will
+        determine the longest consecutive chain of words such that when one character is added to a word it can
+        form another word. For example, a valid chain of words could be: a, at, ate, teas, seats
+      </p>
+      <h2>How does it work?</h2>
+      <p>
+        The algorithm starts by building an object that looks like this:
+        <pre>
+        wordObj = {
+          1:['a'],
+          2:['ab','as','is','of', ...],
+          3:['abs','ace','his', ...],
+          ...
+        }
+        </pre>
+        The key is the word length and its value is an array of words in the given dictionary that have that length.
+      </p>
+      <p>
+        Next, I loop through each word in the given dictionary to find chains from that word. While determining chains, I keep adding
+        to an object called usedWords that tells me if I have already used a word in a chain. If the word I'm about
+        to find chains of has already been used, I don't have to waste time finding chains, since it is guaranteed to be a subset of
+        another chain. For example, if I found the chain 'a','at','ate'; I know I don't need to find chains starting with 'at'.
+      </p>
+      <p>
+        In order to find chains given a starting word, I give that word to this function:
+        <pre>
+          var getChainsForWord = function(word){
+            var chainsForWord = [];
+            var getNextWords = function(word,lengthKey){
+              if (wordObj.hasOwnProperty(lengthKey+1)){
+                var nextWords = checkForWords(word,wordObj[lengthKey+1]);
+                for (var j=0; j&lt;nextWords.length; j++) {
+                  if (!usedWords.hasOwnProperty(nextWords[j])){
+                    usedWords[nextWords[j]] = 1;
+                    chainsForWord.push(nextWords[j]);
+                    getNextWords(nextWords[j],lengthKey+1);
+                  }
+                }
+              }
+            }
+        </pre>
+        Below is the checkForWords function which takes a word and a list of words, each of which should be one character greater
+        than the word. This function will check to see if each word in the list contains all the characters in the given word. If
+        the word in the list does contain those character, it gets pushed to a list and returned. These words are the next level of the
+        chain being constructed.
+        <pre>
+          var checkForWords = function(word,wordList){
+            nextWords = [];
+            for (var i=0; i&lt;wordList.length; i++) {
+              if (containsLetters(wordList[i],word)) {
+                nextWords.push(wordList[i]);
+              }
+            }
+            return nextWords;
+          };
+        </pre>
+        The containsLetters function takes in two strings and checks to see if string 2's characters are a subset of string 1's characters.
+        It accounts for the fact that string 2 might have duplicate letters (e.g. 'seat' does not contain 'ass'). I experimented in sorting
+        the strings alphabetically to gain a quicker comparison, but realized that doing a split, sort, then join was too expensive since
+        this function is called too often. It is able to return quickly if a letter in string 2 is not contained in string 1.
+        <pre>
+        var containsLetters = function(str1, str2){
+          var letters1 = str1.split("");
+          for (var i=0; i&lt;str2.length; i++){
+            if (letters1.indexOf(str2[i]) === -1){
+              return false;
+            } else {
+              letters1.splice(letters1.indexOf(str2[i]),1);
+            }
+          }
+          return true;
+        };
+        </pre>
+      </p>
+      <h2>Improvements</h2>
+      <p>
 
-<div class="row">
-  <div class="container col-md-2">
-    <select name="singleSelect" ng-model="dictionarySize">
-      <option value="1">1 Letter Words</option>
-      <option value="2">2 Letter Words</option>
-      <option value="3">3 Letter Words</option>
-      <option value="4">4 Letter Words</option>
-      <option value="5">5 Letter Words</option>
-      <option value="6">6 Letter Words</option>
-      <option value="7">7 Letter Words</option>
-      <option value="100">All Words</option>
-    </select>
-  </div>
-  <div class="container col-md-5">
-    <h2>Chainer 1</h2>
-    <button ng-click="chainWords1()" class="btn btn-primary">Find Word Chains</button>
-    <div class="container" ng-show="loading1">
-      <img src="/public/images/hex-loader2.gif" height="100" width="150">
-    </div>
-    <div ng-show="longestChain1.chain.chainLength>0">
-      <h4>The longest chain of words is {{longestChain1.chain.chainLength}} words long and took {{longestChain1.time}} ms. Max length of words in the dictionary is {{dictionarySize}}</h4>
-      <ul ng-repeat="word in longestChain1.chain.words">
-        <li>{{word}}</li>
+      </p>
+      <ul>
+        <li>Parallelization</li>
+        <li></li>
       </ul>
     </div>
-  </div>
-  <div class="container col-md-5">
-    <h2>Chainer 2</h2>
-    <button ng-click="chainWords2()" class="btn btn-primary">Find Word Chains</button>
-    <div class="container" ng-show="loading2">
-      <img src="/public/images/hex-loader2.gif" height="100" width="150">
-    </div>
-    <div ng-show="longestChain2.chain.chainLength>0">
-      <h4>The longest chain of words is {{longestChain2.chain.chainLength}} words long and took {{longestChain2.time}} ms. Max length of words in the dictionary is {{dictionarySize}}</h4>
-      <ul ng-repeat="word in longestChain2.chain.words">
-        <li>{{word}}</li>
-      </ul>
+
+    <!-- Functional Column --> 
+    <div class="col-md-4">
+      <h2>Test the word chainer!</h2>
+      <h4>Choose a test dictionary:</h4>
+      <select name="singleSelect" ng-model="dictionaryOption">
+        <option value="">Full Dictionary</option>
+        <option value="half">Half Dictionary</option>
+        <option value="5">5 Letter Words and Less</option>
+      </select>
+      <br><br>
+      <button ng-click="chainWords()" class="btn btn-primary">Find Word Chains</button>
+      <div class="container" ng-show="loading">
+        <img src="/public/images/hex-loader2.gif" height="100" width="150">
+      </div>
+      <div ng-show="longestChain.chain.chainLength>0">
+        <h4>The longest chain of words is {{longestChain.chain.chainLength}} words long and took {{longestChain.time}} ms.</h4>
+        <ul ng-repeat="word in longestChain.chain.words">
+          <li>{{word}}</li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
 
 <div class="row" style="margin-top:10px;">
   <div class="container">
-    <button ng-click="getRandomWord()" class="btn btn-primary">Get Random Word</button>
-    <h3>The Random Word is... {{ randomWord }}</h3>
+    <h2>While you wait for the chainer to finish...</h2>
+    <button ng-click="getRandomWord()" class="btn btn-primary">Get a Random Word!</button>
+    <h4>The Random Word is... {{ randomWord }}</h4>
   </div>
 </div>
