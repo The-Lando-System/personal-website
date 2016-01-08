@@ -17,22 +17,27 @@ controller('WordChainingCtrl', ['$scope', '$http', 'Upload', function ($scope, $
 	$scope.errorMessage = false;
 	$scope.execId = false;
 	$scope.inProgress = false;
+	$scope.loading = false;
 
 	$scope.chainWords = function(){
 		$scope.longestChain = {chain:[],time:0};
 		$scope.errorMessage = false;
+		$scope.loading = true;
 		$http.get(wordServiceDomain + '/dictionary/' + $scope.dictionaryOption)
 		.success(function(data){
 			$http.post(wordChainerDomain + '/longest-chain/', data.words)
 			.success(function(data){
 				$scope.execId = data.uuid;
+				$scope.loading = false;
 			})
 			.error(function(data){
 				$scope.errorMessage = "Failed to start the word chainer!";
+				$scope.loading = false;
 			});
 		})
 		.error(function(data){
 			$scope.errorMessage = "Failed to load the dictionary!";
+			$scope.loading = false;
 		});
 		
 	};
