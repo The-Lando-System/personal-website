@@ -33,69 +33,36 @@
         to an object called usedWords that tells me if I have already used a word in a chain. If the word I'm about
         to find chains of has already been used, I don't have to waste time finding chains, since it is guaranteed to be a subset of
         another chain. For example, if I found the chain 'a','at','ate'; I know I don't need to find chains starting with 'at'.
-      </p>
-      <p>
-        In order to find chains given a starting word, I give that word to this function:
-        <pre>
-          var getChainsForWord = function(word){
-            var chainsForWord = [];
-            var getNextWords = function(word,lengthKey){
-              if (wordObj.hasOwnProperty(lengthKey+1)){
-                var nextWords = checkForWords(word,wordObj[lengthKey+1]);
-                for (var j=0; j&lt;nextWords.length; j++) {
-                  if (!usedWords.hasOwnProperty(nextWords[j])){
-                    usedWords[nextWords[j]] = 1;
-                    chainsForWord.push(nextWords[j]);
-                    getNextWords(nextWords[j],lengthKey+1);
-                  }
-                }
-              }
-            }
-        </pre>
-        Below is the checkForWords function which takes a word and a list of words, each of which should be one character greater
-        than the word. This function will check to see if each word in the list contains all the characters in the given word. If
-        the word in the list does contain those character, it gets pushed to a list and returned. These words are the next level of the
-        chain being constructed.
-        <pre>
-          var checkForWords = function(word,wordList){
-            nextWords = [];
-            for (var i=0; i&lt;wordList.length; i++) {
-              if (containsLetters(wordList[i],word)) {
-                nextWords.push(wordList[i]);
-              }
-            }
-            return nextWords;
-          };
-        </pre>
-        The containsLetters function takes in two strings and checks to see if string 2's characters are a subset of string 1's characters.
-        It accounts for the fact that string 2 might have duplicate letters (e.g. 'seat' does not contain 'ass'). I experimented in sorting
-        the strings alphabetically to gain a quicker comparison, but realized that doing a split, sort, then join was too expensive since
-        this function is called too often. It is able to return quickly if a letter in string 2 is not contained in string 1.
-        <pre>
-        var containsLetters = function(str1, str2){
-          var letters1 = str1.split("");
-          for (var i=0; i&lt;str2.length; i++){
-            if (letters1.indexOf(str2[i]) === -1){
-              return false;
-            } else {
-              letters1.splice(letters1.indexOf(str2[i]),1);
-            }
-          }
-          return true;
-        };
-        </pre>
+        For details on the algorithm, refer to the <a href="https://github.com/The-Lando-System/word-chainer/blob/master/app/chainer.js">
+        Word Chainer</a> and the <a href="https://github.com/The-Lando-System/word-chainer/blob/master/app/chainerHelper.js">
+        Word Chainer Helper</a>
       </p>
       <h2>Complexity</h2>
       <p>
-        
+        When I arrived at my first solution, I was not checking for words already used in chains. I figured my complexity would be:
+        <pre>
+          O(n*k^j)
+          n = length of given dictionary
+          k = average number of words at a certain length
+          j = number of different word lengths in the dictionary
+        </pre>
+        I left out the part where I loop through the characters of each word when checking for the next valid word in the chain.
+        This function varies in complexity because the loop will break if the condition isn't met. With the complexity above, my
+        algorithm took forever. I had to test by using a dictionary with words that were about 6 characters or less. When I introduced
+        the check for words already used, it significantly improved the time. I'm guessing my complexity looked something like this:
+        <pre>
+          O((k-x1)^j) + O((k-x2)^j) + O((k-x3)^j) + ...
+        </pre>
+        Each big O represents the complexity in searching for chains for a single starting word. The x1, x2, ... is a growing number of words
+        that I don't need to check, because they have already been used in a chain.
       </p>
-      <h2>Improvements</h2>
-      <p>
-
-      </p>
+      <h2>Future Improvements</h2>
       <ul>
-        <li>Parallelization</li>
-        <li></li>
+        <li><strong>Parallelization:</strong> If I found chains for words in parallel threads, I could gain a speedup. I would need to cache the
+            usedWords object in memory for each thread to share and atomically update</li>
+        <li><strong>Faster Word Checking:</strong> There is probably a faster way for me to check if characters in word are contained in another...</li>
+        <li><strong>Remove Post-Processing:</strong> I am currently building an object of all word chains and then finding the longest chain. I could
+            probably compute the longest chain at the same time I build the chain to save a little time</li>
       </ul>
     </div>
 
@@ -111,6 +78,9 @@
       <br><br>
       <button ng-click="chainWords()" class="btn btn-primary">Find Word Chains</button>
       <div class="container" ng-show="loading">
+        <h4>Loading...</h4>
+        <p>Warning!</p>
+        <p>The full dictionary will take ~15 minutes to complete!</p>
         <img src="/public/images/hex-loader2.gif" height="100" width="150">
       </div>
       <div ng-show="longestChain.chain.chainLength>0">
@@ -118,6 +88,9 @@
         <ul ng-repeat="word in longestChain.chain.words">
           <li>{{word}}</li>
         </ul>
+      </div>
+      <div class="bg-danger" ng-show="errorMessage">
+        <h4>{{errorMessage}}</h4>
       </div>
     </div>
   </div>
@@ -127,6 +100,23 @@
   <div class="container">
     <h2>While you wait for the chainer to finish...</h2>
     <button ng-click="getRandomWord()" class="btn btn-primary">Get a Random Word!</button>
-    <h4>The Random Word is... {{ randomWord }}</h4>
+    <h4>The Random Word is... {{ randomWord }}!</h4>
+    <br>
+    <div class="input-group">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" ng-click="findAnagrams(anagramInput)">Find Anagrams!</button>
+      </span>
+      <input ng-model="anagramInput" type="text" class="form-control" placeholder="Input a string of characters here...">
+    </div>
+    <br>
+    <ul ng-repeat="anagram in anagrams">
+      <li>{{anagram}}</li>
+    </ul>
+    <div ng-show="anagramLoading">
+      <img src="/public/images/hex-loader2.gif" height="100" width="150">
+    </div>
+    <div class="bg-danger" ng-show="anagramError">
+      <h4>{{anagramError}}</h4>
+    </div>
   </div>
 </div>
