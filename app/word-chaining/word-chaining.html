@@ -76,7 +76,9 @@
         <option value="5">5 Letter Words and Less</option>
       </select>
       <br><br>
-      <button ng-click="chainWords()" class="btn btn-primary">Find Word Chains</button>
+      <div ng-hide="execId">
+        <button ng-click="chainWords()" class="btn btn-primary">Find Word Chains</button>
+      </div>
       <div class="container" ng-show="execId">
         <h4>Successfully started the word chainer!</h4>
         <p>Warning!</p>
