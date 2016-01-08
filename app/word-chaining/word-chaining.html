@@ -77,13 +77,17 @@
       </select>
       <br><br>
       <button ng-click="chainWords()" class="btn btn-primary">Find Word Chains</button>
-      <div class="container" ng-show="loading">
-        <h4>Loading...</h4>
+      <div class="container" ng-show="execId">
+        <h4>Successfully started the word chainer!</h4>
         <p>Warning!</p>
         <p>The full dictionary will take ~15 minutes to complete!</p>
-        <img src="/public/images/hex-loader2.gif" height="100" width="150">
+        <button ng-click="checkForCompletion()" class="btn btn-info">Check for Completion</button>
+      </div>
+      <div ng-show="inProgress">
+        <h4>The word chainer is still in progress...</h4>
       </div>
       <div ng-show="longestChain.chain.chainLength>0">
+        <h4>Complete!</h4>
         <h4>The longest chain of words is {{longestChain.chain.chainLength}} words long and took {{longestChain.time}} ms.</h4>
         <ul ng-repeat="word in longestChain.chain.words">
           <li>{{word}}</li>

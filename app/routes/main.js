@@ -1,5 +1,6 @@
 var express = require('express');
 var path = require('path');
+var redis = require('redis');
 var router = express.Router();
 
 router.get('/', function(req, res) {
@@ -70,9 +71,41 @@ router.get('/image-reader', function(req, res) {
   res.sendFile(path.join(__dirname, '../image-reader','image-reader.html'));
 });
 
-router.post('/dictionary', function(req,res) {
-  console.log(req.body);
-  res.send(req.body);
+// Configuration ======================
+var devConfig = false;
+try {
+    devConfig = require('../../config/config');
+    console.log('Found development config file; using development environment variables')
+} catch(err) {
+    console.log('No config file detected, assuming production environment variables')
+}
+var dbUrl = devConfig ? devConfig.dbUrl : process.env.REDIS_DB_URL;
+var dbPort = devConfig ? devConfig.dbPort : process.env.REDIS_DB_PORT;
+var dbPassword = devConfig ? devConfig.dbPassword : process.env.REDIS_DB_PASSWORD;
+
+// DB ================
+var db = redis.createClient(dbPort, dbUrl, {no_ready_check: true});
+db.auth(dbPassword, function (err) {
+  if (err) console.log(err);
+});
+
+db.on('connect', function() {
+  console.log('Connected to Redis');
+});
+
+router.get('/longest-chain/:id', function(req,res){
+  db.hgetall(req.params.id, function (err, obj) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Chainer status: " + obj.complete);
+      if (obj.complete === "true"){
+        res.send(JSON.stringify(eval("(" + obj.chain + ")")));
+      } else {
+        res.send({notComplete:1});
+      }
+    }
+  });
 });
 
 module.exports = router;

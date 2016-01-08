@@ -14,31 +14,43 @@ controller('WordChainingCtrl', ['$scope', '$http', 'Upload', function ($scope, $
 
 	$scope.dictionaryOption = 1;
 	$scope.longestChain = {chain:[],time:0};
-	$scope.loading = false;
 	$scope.errorMessage = false;
+	$scope.execId = false;
+	$scope.inProgress = false;
 
 	$scope.chainWords = function(){
 		$scope.longestChain = {chain:[],time:0};
 		$scope.errorMessage = false;
-		$scope.loading = true;
 		$http.get(wordServiceDomain + '/dictionary/' + $scope.dictionaryOption)
 		.success(function(data){
 			$http.post(wordChainerDomain + '/longest-chain/', data.words)
 			.success(function(data){
-				console.log(data);
-				$scope.longestChain = data;
-				$scope.loading = false;
+				$scope.execId = data.uuid;
 			})
 			.error(function(data){
-				$scope.loading = false;
-				$scope.errorMessage = "Failed to execute the word chainer!";
+				$scope.errorMessage = "Failed to start the word chainer!";
 			});
 		})
 		.error(function(data){
-			$scope.loading = false;
 			$scope.errorMessage = "Failed to load the dictionary!";
 		});
 		
+	};
+
+	$scope.checkForCompletion = function(){
+		$http.get('/longest-chain/' + $scope.execId)
+		.success(function(data){
+			if (data.hasOwnProperty('notComplete')){
+				$scope.inProgress = true;
+			} else {
+				$scope.longestChain = data;
+				$scope.execId = false;
+				$scope.inProgress = false;
+			}
+		})
+		.error(function(data){
+			$scope.errorMessage = "Failed to check for longest chain!";
+		});
 	};
 
 	$scope.anagramError = false;
